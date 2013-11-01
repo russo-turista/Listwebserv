@@ -26,7 +26,7 @@ public class ListHostsNameController {
 	private HostServers servers;
 	private ArrayList<String> hostNameList = new ArrayList<String>();
 	private String urlConnect = "";
-	private String socketConnect = "";
+	//private String socketConnect = "";
 	private String hostPort = "";
 
 	//private ArrayList hostNameList = new ArrayList<E>();
