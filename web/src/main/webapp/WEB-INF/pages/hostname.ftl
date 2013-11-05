@@ -10,6 +10,7 @@
      
   <fieldset>
     <legend>Host Inf</legend>
+    Current Date: ${currentDate}
   <form name="hostName" action="addHostName.html" method="post">
   <table> 
   <tr>

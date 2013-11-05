@@ -1,10 +1,15 @@
 package com.listwebserv.controllers;
 
 import java.net.UnknownHostException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -38,11 +43,17 @@ public class ListHostsNameController {
 	 * @return The index view (FTL)
 	 */
 	@RequestMapping(value = "/hostname", method = RequestMethod.GET)
-	public String index(/*@ModelAttribute("model")*/ ModelMap model) {
+	public String index(/*@ModelAttribute("model")*/ ModelMap model, HttpServletRequest request,HttpServletResponse response) {
 
 		model.addAttribute("hostNameList", hostNameList);
 		model.addAttribute("hostPort", hostPort);
 		model.addAttribute("urlConnect", urlConnect);
+		 response.setHeader("Refresh", "5");;
+		Calendar calendar = new GregorianCalendar();
+		int hour = calendar.get(Calendar.HOUR);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		return "hostname";
 	}
 	
