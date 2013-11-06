@@ -95,13 +95,13 @@ public class ListHostsNameController {
 		/*model.addAttribute("hostNameList", hostNameList);
 		model.addAttribute("hostPort", hostPort);
 		model.addAttribute("urlConnect", urlConnect);*/
+		hostNameList.add(hostName);
 		
-		response.setHeader("Refresh", "5");
+		response.setHeader("Refresh", "30");
 		try {
-			model.addAttribute("hostNameList", servers.getServersName(hostName));
-		   // model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
+			// model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
 		    model.addAttribute("urlConnect", servers.httpUrlServers(hostName, hostPort));
-			
+		    model.addAttribute("hostNameList", servers.getAddressIP());
 		} catch (UnknownHostException e) {
 			
 			e.printStackTrace();

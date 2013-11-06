@@ -14,17 +14,22 @@ import java.util.Set;
 public class HostServers {
 	public StringBuilder stringTableBuld = new StringBuilder();
 	public String protocol = "HTTP";
-	public InetAddress[] getServersName(String hostName)
+	public String addressIP = "";
+	
+	/*public String getServersName(String hostName)
 			throws UnknownHostException {
 		InetAddress Address = InetAddress.getLocalHost();
 		System.out.println(Address);
 		Address = InetAddress.getByName(hostName);
 		System.out.println(Address);
 		InetAddress SW[] = InetAddress.getAllByName(hostName);
-		/*
-		 * for (int i = 0; i < SW.length; i++) System.out.println(SW[i]);
-		 */
-		return SW;
+		
+		 // for (int i = 0; i < SW.length; i++) System.out.println(SW[i]);
+		 
+		return addressIP;
+	}*/
+	public String getAddressIP(){
+		return addressIP;
 	}
 
 	/*
@@ -68,6 +73,12 @@ public class HostServers {
 		}
 		URL url = new URL(protocol, hostName, hostPort,"/");
 		
+		InetAddress address = InetAddress.getByName(url.getHost());
+		//address.getHostAddress()
+		//addressIP = address.toString();
+		addressIP = address.getHostAddress().toString();
+		//addressIP = addressIP.substring(addressIP.indexOf("/")+1,addressIP.length()); 
+		
 		HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 
 		// Display request method.
@@ -85,6 +96,8 @@ public class HostServers {
 		stringTableBuld.append(" Сообщение ответа: ");
 		stringTableBuld.append(urlCon.getResponseMessage());
 		stringTableBuld.append("<br>");
+		
+				
 		// Get a list of the header fields and a set
 		// of the header keys.
 		Map<String, List<String>> hdrMap = urlCon.getHeaderFields();
