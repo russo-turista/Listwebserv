@@ -1,5 +1,6 @@
 package com.listwebserv.controllers;
 
+import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -43,17 +44,8 @@ public class ListHostsNameController {
 	 * @return The index view (FTL)
 	 */
 	@RequestMapping(value = "/hostname", method = RequestMethod.GET)
-	public String index(/*@ModelAttribute("model")*/ ModelMap model, HttpServletRequest request,HttpServletResponse response) {
+	public String addHostName(/*@ModelAttribute("model")*/ ModelMap model, HttpServletRequest request,HttpServletResponse response) {
 
-		model.addAttribute("hostNameList", hostNameList);
-		model.addAttribute("hostPort", hostPort);
-		model.addAttribute("urlConnect", urlConnect);
-		 response.setHeader("Refresh", "5");;
-		Calendar calendar = new GregorianCalendar();
-		int hour = calendar.get(Calendar.HOUR);
-		int minute = calendar.get(Calendar.MINUTE);
-		int second = calendar.get(Calendar.SECOND);
-		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		return "hostname";
 	}
 	
@@ -64,18 +56,20 @@ public class ListHostsNameController {
 	 * @param user
 	 * @return Redirect to /index page to display user list
 	 * @throws Exception 
-	 */
+	 * @throws Exception 
+	 *//*
 	@RequestMapping(value = "/addHostName", method = RequestMethod.POST)
-	public String add(/* @ModelAttribute("model")*/ ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort ) throws Exception {
+	public String add( @ModelAttribute("model") ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort,  HttpServletRequest request,HttpServletResponse response ) throws Exception {
 
 		
-		/*if (firstname != null && lastname != null) {
+		if (firstname != null && lastname != null) {
 			synchronized (userList) {
 				userList.add(new User(lastname, firstname));
 				System.out.println("userList.size= " + userList.size());
 			}
 			
-		}*/
+		}
+		response.setHeader("Refresh", "5");
 		try {
 			model.addAttribute("hostNameList", servers.getServersName(hostName));
 		   // model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
@@ -85,7 +79,35 @@ public class ListHostsNameController {
 			
 			e.printStackTrace();
 		}
-		return "hostname";
+		return "hostsInfoList";
+	}*/
+	@RequestMapping(value = "/hostsInfoList", method = RequestMethod.GET)
+	public String hostsInfoList (ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort,  HttpServletRequest request,HttpServletResponse response) throws Exception {
+
+		
+		
+		Calendar calendar = new GregorianCalendar();
+		int hour = calendar.get(Calendar.HOUR);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		
+		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
+		/*model.addAttribute("hostNameList", hostNameList);
+		model.addAttribute("hostPort", hostPort);
+		model.addAttribute("urlConnect", urlConnect);*/
+		
+		response.setHeader("Refresh", "5");
+		try {
+			model.addAttribute("hostNameList", servers.getServersName(hostName));
+		   // model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
+		    model.addAttribute("urlConnect", servers.httpUrlServers(hostName, hostPort));
+			
+		} catch (UnknownHostException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return "hostsInfoList";
 	}
 
 }
