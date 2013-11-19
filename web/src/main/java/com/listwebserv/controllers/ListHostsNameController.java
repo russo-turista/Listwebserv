@@ -30,7 +30,12 @@ public class ListHostsNameController {
 	
 	@Inject
 	private HostServers servers;
-	private ArrayList<String> hostNameList = new ArrayList<String>();
+	@Inject
+	private RequestServers requestServers;
+	@Inject
+	private CreateThreadPool createThereadPool;
+	
+	public ArrayList<String> hostNameList = new ArrayList<String>();
 	private String urlConnect = "";
 	//private String socketConnect = "";
 	private String hostPort = "";
@@ -46,6 +51,11 @@ public class ListHostsNameController {
 	@RequestMapping(value = "/hostname", method = RequestMethod.GET)
 	public String addHostName(/*@ModelAttribute("model")*/ ModelMap model, HttpServletRequest request,HttpServletResponse response) {
 
+		return "hostname";
+	}
+	@RequestMapping(value = "/hostname", method = RequestMethod.POST)
+	public String getHostName(ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort) {
+		requestServers.getListHosts(hostName, hostPort);
 		return "hostname";
 	}
 	
@@ -82,7 +92,7 @@ public class ListHostsNameController {
 		return "hostsInfoList";
 	}*/
 	@RequestMapping(value = "/hostsInfoList", method = RequestMethod.GET)
-	public String hostsInfoList (ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort,  HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String hostsInfoList (ModelMap model, /*@RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort,*/  HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		
 		
@@ -95,18 +105,21 @@ public class ListHostsNameController {
 		/*model.addAttribute("hostNameList", hostNameList);
 		model.addAttribute("hostPort", hostPort);
 		model.addAttribute("urlConnect", urlConnect);*/
-		hostNameList.add(hostName);
+		//hostNameList.add(hostName);
+//		requestServers.getListHosts(hostName, hostPort);
 		
 		response.setHeader("Refresh", "30");
-		try {
+//		try {
 			// model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
-		    model.addAttribute("urlConnect", servers.httpUrlServers(hostName, hostPort));
+		   
+		   // model.addAttribute("urlConnect", servers.httpUrlServers(hostName, hostPort));
 		    model.addAttribute("hostNameList", servers.getAddressIP());
-		} catch (UnknownHostException e) {
+		    
+		/*} catch (UnknownHostException e) {
 			
 			e.printStackTrace();
 		}
-		
+		*/
 		return "hostsInfoList";
 	}
 

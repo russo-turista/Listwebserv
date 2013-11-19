@@ -6,15 +6,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 @Component
 public class HostServers {
+	@Inject 
+	private RequestServers requestServers;
 	public StringBuilder stringTableBuld = new StringBuilder();
 	public String protocol = "HTTP";
-	public String addressIP = "";
+	//public Map<String, String> addressIP = new HashMap<String, String>();
 	
 	/*public String getServersName(String hostName)
 			throws UnknownHostException {
@@ -28,9 +33,9 @@ public class HostServers {
 		 
 		return addressIP;
 	}*/
-	public String getAddressIP(){
+	/*public Map<String, String> getAddressIP(){
 		return addressIP;
-	}
+	}*/
 
 	/*
 	 * Добавим соединения Socket
@@ -76,14 +81,15 @@ public class HostServers {
 		InetAddress address = InetAddress.getByName(url.getHost());
 		//address.getHostAddress()
 		//addressIP = address.toString();
-		addressIP = address.getHostAddress().toString();
+		//addressIP = address.getHostAddress().toString();
 		//addressIP = addressIP.substring(addressIP.indexOf("/")+1,addressIP.length()); 
 		
 		HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 
 		// Display request method.
 		// System.out.println("Request method is " + hpCon.getRequestMethod());
-
+		requestServers.addressIP.put(hostName, address.getHostAddress().toString() + "  " + urlCon.getResponseMessage());
+//		addressIP.put(hostName, address.getHostAddress().toString() + "  " + urlCon.getResponseMessage());
 		stringTableBuld.append("Метод запроса: ");
 		stringTableBuld.append(urlCon.getRequestMethod());
 		stringTableBuld.append("<br>");
@@ -106,10 +112,10 @@ public class HostServers {
 		
 
 		// Display all header keys and values..
-		for (String k : hdrField) {
+		/*for (String k : hdrField) {
 			stringTableBuld.append(k + ": " + hdrMap.get(k));
 			stringTableBuld.append("<br>");
-		}
+		}*/
 
 		
 		

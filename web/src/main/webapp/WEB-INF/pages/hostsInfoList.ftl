@@ -17,11 +17,12 @@
     <tr>
         <th>Host Ip </th>
     </tr>
-    <#list hostNameList  as hostName>
+     <#list hostNameList?keys as hostNameValue>
     <tr>
-        <td>${hostName}</td>
+        <td>${hostNameValue}</td>
+        <td>${hostNameList[hostNameValue]}</td>
     </tr>
-    </#list>
+    </#list>       
      <tr>
         <th>Host information</th>
     </tr>
