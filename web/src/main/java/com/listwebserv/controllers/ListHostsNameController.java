@@ -1,12 +1,8 @@
 package com.listwebserv.controllers;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,24 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.listwebserv.logic.*;
+import com.listwebserv.logic.CreateThreadPool;
 
 @Controller
 @Service
 public class ListHostsNameController {
 	
-	@Inject
-	private HostServers servers;
-	@Inject
-	private RequestServers requestServers;
 	@Inject
 	private CreateThreadPool createThereadPool;
 	
@@ -50,12 +39,13 @@ public class ListHostsNameController {
 	 */
 	@RequestMapping(value = "/hostname", method = RequestMethod.GET)
 	public String addHostName(/*@ModelAttribute("model")*/ ModelMap model, HttpServletRequest request,HttpServletResponse response) {
-
+		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
 		return "hostname";
 	}
 	@RequestMapping(value = "/hostname", method = RequestMethod.POST)
 	public String getHostName(ModelMap model, @RequestParam(value = "hostName") String hostName, @RequestParam(value = "hostPort") String hostPort) {
-		requestServers.getListHosts(hostName, hostPort);
+		System.out.println("hostNameGET!!!!!!!!!!!!!!!!!!!!!");
+		createThereadPool.setListHosts(hostName, hostPort);
 		return "hostname";
 	}
 	
@@ -113,7 +103,7 @@ public class ListHostsNameController {
 			// model.addAttribute("socketConnect", servers.createScketConnect(hostName, hostPort));
 		   
 		   // model.addAttribute("urlConnect", servers.httpUrlServers(hostName, hostPort));
-		    model.addAttribute("hostNameList", servers.getAddressIP());
+		    model.addAttribute("hostNameList", createThereadPool.getListHosts());
 		    
 		/*} catch (UnknownHostException e) {
 			

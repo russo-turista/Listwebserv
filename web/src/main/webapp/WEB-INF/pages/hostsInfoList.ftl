@@ -23,12 +23,6 @@
         <td>${hostNameList[hostNameValue]}</td>
     </tr>
     </#list>       
-     <tr>
-        <th>Host information</th>
-    </tr>
-    <tr>
-        <td> ${urlConnect} </td>
-    </tr>
   </table>
  </fieldset>
 </div>  
