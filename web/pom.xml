@@ -3,19 +3,14 @@
 	http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.listwebserv</groupId>
-		<artifactId>listwebserv</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
-
-	<groupId>com.listwebserv</groupId>
-	<artifactId>web</artifactId>
-	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
-	<name>CounterWebApp Maven Webapp</name>
-	<url>http://maven.apache.org</url>
 	
+	<artifactId>web</artifactId>
+	<parent>
+    	<groupId>com.listwebserv</groupId>
+        <artifactId>listwebserv</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+	<packaging>war</packaging>
 
 	<dependencies>
 		<dependency>
@@ -36,4 +31,18 @@
 		</dependency>
 
 	</dependencies>
+	<build>
+		<finalName>WebListServ</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -1,3 +1,4 @@
+<#import "spring.ftl" as spring />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <html>
 <head><title>List Hosts name</title>
@@ -14,14 +15,14 @@
   <table> 
   <tr>
    <th>
-    Add address: <input type="text" name="hostName" /> <br/>
+    Add address:  <@spring.formInput "hostName"/> <br/>
    </th>
    <th>
-    Add port: <input type="text" name="hostPort" /> <br/>
+    Add port: <@spring.formInput "hostPort" /> <br/>
    </th>
     </tr>
    </table>
-    <input type="submit" value="   Send   " />
+    <input type="submit" value="Send" />
   </form>
   </fieldset>
   <br/>

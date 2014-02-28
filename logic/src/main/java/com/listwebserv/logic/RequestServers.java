@@ -27,7 +27,7 @@ public class RequestServers implements Callable<String>  {
 	}*/
 
 	@Override
-	public String  call() {
+	public String  call() throws Exception {
 		try {
 			System.out.println("Thread number= " + i++);
 			TimeUnit.MILLISECONDS.sleep(1000);
