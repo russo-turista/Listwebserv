@@ -16,13 +16,12 @@ public class HostServers {
 	public String protocol = "HTTP";
 	
 	
-	public String httpUrlServers(String hostName, String hostPortString ) throws Exception {
-		int hostPort = Integer.parseInt(hostPortString);
+	public String httpUrlServers(String hostName, Integer hostPortString ) throws Exception {
 		
 		if (stringTableBuld.capacity() != 0) {
 			stringTableBuld.delete(0, stringTableBuld.length());
 		}
-		URL url = new URL(protocol, hostName, hostPort,"/");		
+		URL url = new URL(protocol, hostName, hostPortString,"/");		
 		InetAddress address = InetAddress.getByName(url.getHost());		
 		HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 

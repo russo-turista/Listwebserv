@@ -15,21 +15,21 @@ import org.springframework.stereotype.Component;
 public class CreateThreadPool {
 
 	private String hostName;
-	private String hostPort;
-	public Map<String, String> listHosts = new HashMap<String, String>();
+	private Integer hostPort;
+	public Map<String, Integer> listHosts = new HashMap<String, Integer>();
 	public Map<String, String> resaultListHosts = new HashMap<String, String>();
 	
-	public void setListHosts(String hostName, String hostPort) {
+	public void setListHosts(String hostName, Integer hostPort) {
 		listHosts.put(hostName, hostPort);
 		createPool(listHosts);
 	}
 	public Map<String, String> getListHosts(){		
 		return resaultListHosts;
 	}
-	public void createPool(Map<String, String> listHosts) {
+	public void createPool(Map<String, Integer> listHosts) {
 		ExecutorService exec = Executors.newCachedThreadPool();
 		ArrayList<Future<String>> results = new ArrayList<Future<String>>();
-		for (Entry<String, String> entry : listHosts.entrySet()) {
+		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
 			results.add(exec.submit(new RequestServers(hostName, hostPort)));

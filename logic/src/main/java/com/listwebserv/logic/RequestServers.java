@@ -13,12 +13,12 @@ public class RequestServers implements Callable<String>  {
 	private HostServers servers;
 	private int i=0;
 	private String hostName;
-	private String hostPort;
+	private Integer hostPort;
 	//public Map<String, String> addressIP = new HashMap<String, String>();
 	//Map<String, String> listHosts = new HashMap();
 	
 	
-	public RequestServers(String hostName, String hostPort) {
+	public RequestServers(String hostName, Integer hostPort) {
 		this.hostName = hostName;
 		this.hostPort = hostPort;
 	}

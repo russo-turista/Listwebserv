@@ -11,14 +11,15 @@
      
   <fieldset>
     <legend>Host Inf</legend>
-  <form name="hostName" action="hostsInfoList" method="GET">
+  <form action="hostsInfoList" method="POST">
+  
   <table> 
   <tr>
    <th>
-    Add address:  <@spring.formInput "hostName"/> <br/>
+    Add address:  <@spring.formInput "servers.hostName"/> <br/>
    </th>
    <th>
-    Add port: <@spring.formInput "hostPort" /> <br/>
+    Add port: <@spring.formInput "servers.hostPort" /> <br/>
    </th>
     </tr>
    </table>
