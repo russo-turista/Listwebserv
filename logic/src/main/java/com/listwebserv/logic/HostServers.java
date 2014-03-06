@@ -1,35 +1,28 @@
 package com.listwebserv.logic;
 
 import org.springframework.stereotype.Component;
-
 import java.net.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.inject.Inject;
 
 @Component
 public class HostServers {
-	public StringBuilder stringTableBuld = new StringBuilder();
+	public StringBuilder stringTableBuild = new StringBuilder();
 	public String protocol = "HTTP";
 	
 	
-	public String httpUrlServers(String hostName, Integer hostPortString ) throws Exception {
+	public String httpUrlServers(String hostName, Integer hostPort ) throws Exception {
 		
-		if (stringTableBuld.capacity() != 0) {
-			stringTableBuld.delete(0, stringTableBuld.length());
+		if (stringTableBuild.capacity() != 0) {
+			stringTableBuild.delete(0, stringTableBuild.length());
 		}
-		URL url = new URL(protocol, hostName, hostPortString,"/");		
+		URL url = new URL(protocol, hostName, hostPort,"/");		
 		InetAddress address = InetAddress.getByName(url.getHost());		
 		HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 
-		stringTableBuld.append(address.getHostAddress().toString());
-		stringTableBuld.append("  ");
-		stringTableBuld.append(urlCon.getResponseMessage());	
+		stringTableBuild.append(address.getHostAddress().toString());
+		stringTableBuild.append("  ");
+		stringTableBuild.append(urlCon.getResponseMessage());	
 		
-		return stringTableBuld.toString();
+		return stringTableBuild.toString();
 	}
 
 }
