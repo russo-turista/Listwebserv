@@ -8,13 +8,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.inject.Inject;
+
 import org.springframework.stereotype.Component;
+
+import com.listwebserv.service.ServListService;
 
 @Component
 public class RequestServers  {
 	@Inject
 	private HostServers servers;
 	
+	@Inject
+	private ServListService servListService;
 	
 	private String hostName;
 	private Integer hostPort;
@@ -28,7 +33,8 @@ public class RequestServers  {
 		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
-			listHostsFull.put(entry.getKey(),servers.httpUrlServers(hostName, hostPort));
+			//listHostsFull.put(entry.getKey(),servers.httpUrlServers(hostName, hostPort));
+			servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
 		}
 		return listHostsFull;
 				

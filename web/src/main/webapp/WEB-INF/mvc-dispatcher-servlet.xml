@@ -16,7 +16,7 @@
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
 	</mvc:interceptors>
-	<!-- <import resource="jdbc-context.xml" />
-	<import resource="application-security.xml" /> -->
+	<import resource="jdbc-context.xml" />
+	<import resource="application-security.xml" />
  	<import resource="view-template.xml" />
 </beans>

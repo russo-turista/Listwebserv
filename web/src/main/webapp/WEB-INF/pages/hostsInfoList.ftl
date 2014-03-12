@@ -17,10 +17,10 @@
     <tr>
         <th>Host Ip </th>
     </tr>
-     <#list hostNameList?keys as hostNameValue>
+     <#list hostNameList.Servers as hostNameValue>
     <tr>
-        <td>${hostNameValue}</td>
-        <td>${hostNameList[hostNameValue]}</td>
+        <td>${hostNameValue.hostName}</td>
+       <td>${hostNameValue.hostInfo}</td>
     </tr>
     </#list>       
   </table>

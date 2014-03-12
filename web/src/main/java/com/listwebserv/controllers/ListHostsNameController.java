@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.listwebserv.domain.Servers;
 import com.listwebserv.logic.RequestServers;
+import com.listwebserv.service.ServListService;
 
 @Controller
 public class ListHostsNameController {
@@ -29,6 +30,9 @@ public class ListHostsNameController {
 	
 	@Inject 
 	private RequestServers requestServers;
+	
+	@Inject
+	private ServListService servListService;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -57,8 +61,9 @@ public class ListHostsNameController {
 		
 		if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());
+			requestServers.listsServers(listHosts);
 		}		
-		model.addAttribute("hostNameList", requestServers.listsServers(listHosts));
+		model.addAttribute("hostNameList", servListService.getListServ());
 		    
 		return "hostsInfoList";
 	}
