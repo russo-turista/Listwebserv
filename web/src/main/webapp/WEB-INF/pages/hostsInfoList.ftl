@@ -17,12 +17,12 @@
     <tr>
         <th>Host Ip </th>
     </tr>
-     <#list hostNameList.Servers as hostNameValue>
+     <#list hostNameList as hostNameValue>
     <tr>
         <td>${hostNameValue.hostName}</td>
        <td>${hostNameValue.hostInfo}</td>
     </tr>
-    </#list>       
+    </#list>           
   </table>
  </fieldset>
 </div>  

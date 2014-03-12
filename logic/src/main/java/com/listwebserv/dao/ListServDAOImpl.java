@@ -18,7 +18,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-
 import com.listwebserv.domain.Servers;
 
 /**
@@ -51,15 +50,15 @@ public class ListServDAOImpl implements ListServDAO {
     }
 
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
-    	@Inject
-    	Servers servers;
+    	
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	System.out.println("hostName= " + rs.getString("hostName"));
+        	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
         	servers.setHostInfo(rs.getString("hostInfo"));
             return servers;
         }
     };
+    
 	public void addUser(String user, String password) {
 		// TODO Auto-generated method stub
 		
@@ -83,5 +82,4 @@ public class ListServDAOImpl implements ListServDAO {
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	
-    
 }

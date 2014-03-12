@@ -16,25 +16,6 @@
 			http://www.springframework.org/schema/jee/spring-jee-3.0.xsd">   
     
     <tx:annotation-driven transaction-manager="transactionManager" />
-    
-    <!-- <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="jdbc.properties" /> -->
-         
-
-    <!-- <bean id="dataSource"
-          class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
-          p:driverClassName="${jdbc.driverClassName}"
-          p:url="${jdbc.databaseurl}" 
-          p:username="${jdbc.username}"
-          p:password="${jdbc.password}" />
-	 -->
-	<!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
-          <property name="driverClassName" value="${db.driver.prod}" />  
-          <property name="url" value="${db.url.prod}" />  
-          <property name="username" value="${db.username.prod}" />  
-          <property name="password" value="${db.password.prod}" />  
-    </bean> -->  
 	<!-- <jee:jndi-lookup id="dataSource" jndi-name="/jdbc/ServListDB" resource-ref="true" /> -->
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">

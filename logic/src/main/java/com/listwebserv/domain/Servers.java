@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Servers {
+	
     private String hostName;
     private Integer hostPort;
     private String ipAdress;
