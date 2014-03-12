@@ -54,8 +54,9 @@ public class ListServDAOImpl implements ListServDAO {
     	@Inject
     	Servers servers;
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	System.out.println("hostName= " + rs.getString("hostName"));
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostName(rs.getString("hostInfo"));
+        	servers.setHostInfo(rs.getString("hostInfo"));
             return servers;
         }
     };
