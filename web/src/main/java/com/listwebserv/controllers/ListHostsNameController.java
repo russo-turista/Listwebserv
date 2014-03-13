@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,8 @@ import com.listwebserv.service.ServListService;
 
 @Controller
 public class ListHostsNameController {
+	
+	private static final Logger logger = Logger.getLogger(ListHostsNameController.class);
 	
 	@Inject 
 	private Servers servers;
@@ -56,8 +59,10 @@ public class ListHostsNameController {
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		
 		response.setHeader("Refresh", "30");
-		System.out.println("hostName= " + servers.getHostName());
-		System.out.println("hostPort= " + servers.getHostPort());
+		/*System.out.println("hostName= " + servers.getHostName());
+		System.out.println("hostPort= " + servers.getHostPort());*/
+		logger.info("hostName= " + servers.getHostName());
+		logger.info("hostPort= " + servers.getHostPort());
 		
 		if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());

@@ -20,6 +20,7 @@
 		<spring.version>3.0.5.RELEASE</spring.version>
 		<junit.version>4.11</junit.version>
 		<jdk.version>1.7</jdk.version>
+		<org.slf4j-version>1.7.0</org.slf4j-version>
 	</properties>
 	
  <dependencies>
@@ -61,19 +62,12 @@
             <version>3.0.5.RELEASE</version>
             <type>jar</type>
             <scope>compile</scope>
-            <exclusions>
+            <!-- <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
                     <groupId>commons-logging</groupId>
                 </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
-            <type>jar</type>
-            <scope>compile</scope>
+            </exclusions> -->
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -167,7 +161,28 @@
             <version>3.1</version>
             <scope>test</scope>
         </dependency>
-            
+	    <dependency>
+	    	<groupId>log4j</groupId>
+	    	<artifactId>log4j</artifactId>
+	    	<version>1.2.14</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${org.slf4j-version}</version>
+			<scope>runtime</scope>
+		</dependency>
     </dependencies>
     <build>
         <plugins>
