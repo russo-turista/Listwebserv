@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
  * Класс сущности User
  */
 @Component
-public class User {
+public class Employee {
 	
 	/**
 	 *  Уникальный идентификатор сущности в системе
 	 */
-	private Long id; 
+	private Long userId; 
 	
 	/**
 	 * ФИО сотрудника.
@@ -44,7 +44,7 @@ public class User {
 	/**
 	 * Дата последнего входа в систему.
 	 */
-	private Timestamp last_Login;
+	private Timestamp lastLogin;
 	
 	
 	/**
@@ -59,13 +59,14 @@ public class User {
 	 * Признак того, является ли сотрудник Администратором.
 	 */
 	private Boolean admin;
-	public Long getId() {
-		return id;
+	
+	public Long getUserId() {
+		return userId;
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 
@@ -119,13 +120,13 @@ public class User {
 	}
 
 
-	public Timestamp getLast_Login() {
-		return last_Login;
+	public Timestamp getLastLogin() {
+		return lastLogin;
 	}
 
 
-	public void setLast_Login(Timestamp last_Login) {
-		this.last_Login = last_Login;
+	public void setLast_Login(Timestamp lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
 

@@ -9,4 +9,27 @@ CREATE DATABASE "ServListDB";
        LC_CTYPE = 'English_United States.1252'
        CONNECTION LIMIT = -1;
 
-CREATE TABLE servList (hostName TEXT, hostInfo TEXT);
+CREATE TABLE server (
+	ID_SERVER  SERIAL PRIMARY KEY,
+	HOSTNAME		VARCHAR(128)	          NOT NULL,
+	HOSTPORT		INT  DEFAULT 80           NOT NULL,
+	URLPATH			VARCHAR(128) DEFAULT "/"  NOT NULL,
+	RESPONSE_HOST   TEXT,
+	LAST_CHECK 		TIMESTAMP,
+	CREATED		    TIMESTAMP   		      NOT NULL,
+	ACTIVE	        BOOLEAN                   NOT NULL,
+	STATE			ENUM
+);
+
+CREATE TABLE employee (hostName TEXT, hostInfo TEXT
+	ID_USER  SERIAL PRIMARY KEY,
+		NAME           VARCHAR(128)      NOT NULL,
+	    LOGIN          VARCHAR(16)       NOT NULL,
+	    PASSWORD       VARCHAR(16)		 NOT NULL,
+	    EMAIL		   VARCHAR(64)       NOT NULL,
+	    CREATED		   TIMESTAMP   		 NOT NULL,
+	    LAST_LOGIN	   TIMESTAMP,
+	    ACTIVE	       BOOLEAN           NOT NULL,
+	    ADMIN	       BOOLEAN           NOT NULL,
+   
+);

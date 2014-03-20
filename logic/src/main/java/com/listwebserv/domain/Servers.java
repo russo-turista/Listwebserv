@@ -14,7 +14,7 @@ public class Servers {
 	/**
 	 * Уникальный идентификатор сущности в системе.
 	 */
-	private Long Id;	
+	private Long idServer;	
 	
     /**
      * Уникальное имя сервера в системе.
@@ -63,11 +63,11 @@ public class Servers {
     
     private String hostInfo;
     
-    public Long getId() {
-		return Id;
+    public Long getIdServer() {
+		return idServer;
 	}
-	public void setId(Long id) {
-		Id = id;
+	public void setIdServer(Long idServer) {
+		this.idServer = idServer;
 	}
 	public String getUrlPath() {
 		return urlPath;
