@@ -8,20 +8,22 @@ CREATE DATABASE "ServListDB";
        LC_COLLATE = 'English_United States.1252'
        LC_CTYPE = 'English_United States.1252'
        CONNECTION LIMIT = -1;
-
+CREATE TYPE STATE_TYPE AS ENUM ('OK', 'WARN', 'FAIL');
 CREATE TABLE server (
 	ID_SERVER  SERIAL PRIMARY KEY,
 	HOSTNAME		VARCHAR(128)	          NOT NULL,
 	HOSTPORT		INT  DEFAULT 80           NOT NULL,
-	URLPATH			VARCHAR(128) DEFAULT "/"  NOT NULL,
+	URLPATH			VARCHAR(128) DEFAULT '/'  NOT NULL,
 	RESPONSE_HOST   TEXT,
 	LAST_CHECK 		TIMESTAMP,
 	CREATED		    TIMESTAMP   		      NOT NULL,
 	ACTIVE	        BOOLEAN                   NOT NULL,
-	STATE			ENUM
+	STATE			STATE_TYPE				  NOT NULL,
+	IP_ADRESS		VARCHAR(128)			  NOT NULL
+	
 );
 
-CREATE TABLE employee (hostName TEXT, hostInfo TEXT
+CREATE TABLE employee (
 	ID_USER  SERIAL PRIMARY KEY,
 		NAME           VARCHAR(128)      NOT NULL,
 	    LOGIN          VARCHAR(16)       NOT NULL,
@@ -30,6 +32,6 @@ CREATE TABLE employee (hostName TEXT, hostInfo TEXT
 	    CREATED		   TIMESTAMP   		 NOT NULL,
 	    LAST_LOGIN	   TIMESTAMP,
 	    ACTIVE	       BOOLEAN           NOT NULL,
-	    ADMIN	       BOOLEAN           NOT NULL,
+	    ADMIN	       BOOLEAN           NOT NULL
    
 );
