@@ -11,19 +11,100 @@ import org.springframework.stereotype.Component;
 @Component
 public class Servers {
 	
+	/**
+	 * Уникальный идентификатор сущности в системе.
+	 */
 	private Long Id;	
+	
+    /**
+     * Уникальное имя сервера в системе.
+     */
     private String hostName;
+    
+    /**
+     * Порт сервера.
+     */
     private Integer hostPort;
+    
+    /**
+     * Путь к ресурсу. 
+     */
     private String urlPath; 
+    
+    /**
+     * Заголовки последнего ответа сервера.
+     */
     private String responseHost;
+    
+    /**
+     * Время последней проверки состояния.
+     */
     private Timestamp lastCheck;
+    
+    /**
+     * Дата создания или редактирования.
+     */
     private Timestamp created;
+    
+    /**
+     * В случае значения false для сущности не нужно выполнять мониторинг состояния.
+     */
     private Boolean active;
-    private Enum state;
     
+    /**
+     * Последнее состояние.
+     */
+    private Enum state; 
     
-    //private String ipAdress;
+    /**
+     * IP-адрес или имя хоста.
+     */
+    private String ipAdress;
+    
     private String hostInfo;
+    
+    public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	public String getUrlPath() {
+		return urlPath;
+	}
+	public void setUrlPath(String urlPath) {
+		this.urlPath = urlPath;
+	}
+	public String getResponseHost() {
+		return responseHost;
+	}
+	public void setResponseHost(String responseHost) {
+		this.responseHost = responseHost;
+	}
+	public Timestamp getLastCheck() {
+		return lastCheck;
+	}
+	public void setLastCheck(Timestamp lastCheck) {
+		this.lastCheck = lastCheck;
+	}
+	public Timestamp getCreated() {
+		return created;
+	}
+	public void setCreated(Timestamp created) {
+		this.created = created;
+	}
+	public Enum getState() {
+		return state;
+	}
+	public void setState(Enum state) {
+		this.state = state;
+	}
+	public String getIpAdress() {
+		return ipAdress;
+	}
+	public void setIpAdress(String ipAdress) {
+		this.ipAdress = ipAdress;
+	}
     
 	public String getHostInfo() {
 		return hostInfo;
@@ -40,21 +121,39 @@ public class Servers {
 	public void setIpAdress(String ipAdress) {
 		this.ipAdress = ipAdress;
 	}*/
+	/**
+	 * @return
+	 */
 	public Boolean getActive() {
 		return active;
 	}
+	/**
+	 * @param active
+	 */
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+	/**
+	 * @return
+	 */
 	public String getHostName() {
 		return hostName;
 	}
+	/**
+	 * @param hostName
+	 */
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
 	}
+	/**
+	 * @return
+	 */
 	public Integer getHostPort() {
 		return hostPort;
 	}
+	/**
+	 * @param hostPort
+	 */
 	public void setHostPort(Integer hostPort) {
 		this.hostPort = hostPort;
 	}
