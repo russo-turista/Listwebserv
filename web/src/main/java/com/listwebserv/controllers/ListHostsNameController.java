@@ -64,10 +64,10 @@ public class ListHostsNameController {
 		logger.info("hostName= " + servers.getHostName());
 		logger.info("hostPort= " + servers.getHostPort());
 		
-		if (servers.getHostName() != null && servers.getHostPort() != null){
+		/*if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());
 			requestServers.listsServers(listHosts);
-		}		
+		}		*/
 		model.addAttribute("hostNameList", servListService.getListServ());
 		    
 		return "hostsInfoList";

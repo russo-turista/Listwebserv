@@ -14,8 +14,8 @@ public class ServListService {
 	@Inject
 	ListServDAO listServDAO;
 	
-	public void addServerName(String serverName, String hostInfo){
-		listServDAO.addServerName(serverName, hostInfo);
+	public void addServerName(String serverName, String ipAdress){
+		listServDAO.addServerName(serverName, ipAdress);
 	}
 	
 	public List<Servers> getListServ(){

@@ -14,8 +14,8 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.listwebserv.domain.Servers;
@@ -34,10 +34,10 @@ public class ListServDAOImpl implements ListServDAO {
     private String sql = "";
     
     /**
-     * переменная типа {@link SimpleJdbcTemplate} экземпляр класса
+     * переменная типа {@link JdbcTemplate } экземпляр класса
      * SimpleJdbcTemplate
      */
-    private SimpleJdbcTemplate jdbcTemplate;
+    private JdbcTemplate  jdbcTemplate;
 
     /**
      * Реализуем jdbcTemplate, передаем параметры соединения
@@ -46,7 +46,7 @@ public class ListServDAOImpl implements ListServDAO {
      */
     @Resource(name = "dataSource")
     public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
@@ -54,7 +54,7 @@ public class ListServDAOImpl implements ListServDAO {
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostInfo(rs.getString("hostInfo"));
+        	servers.setHostInfo(rs.getString("ipAdress"));
             return servers;
         }
     };
@@ -65,12 +65,12 @@ public class ListServDAOImpl implements ListServDAO {
 	}
 
 	
-	public void addServerName(String hostName, String hostInfo) {
-		sql = "insert into servList(hostName, hostInfo) values "
-                + "(:hostName, :hostInfo);";
+	public void addServerName(String hostName, String ipAdress) {
+		sql = "insert into servList(hostName, ipAdress) values "
+                + "(:hostName, :ipAdress);";
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("hostName", hostName);
-        parameters.put("hostInfo", hostInfo);
+        parameters.put("ipAdress", ipAdress);
 
         jdbcTemplate.update(sql, parameters);
 		
@@ -78,7 +78,7 @@ public class ListServDAOImpl implements ListServDAO {
 
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName, hostInfo from servList";
+		sql = "SELECT hostName, ipAdress from servList";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	

@@ -35,3 +35,8 @@ CREATE TABLE employee (
 	    ADMIN	       BOOLEAN           NOT NULL
    
 );
+
+--------------------
+INSERT INTO server (HOSTNAME, RESPONSE_HOST, LAST_CHECK, CREATED,
+ACTIVE, STATE, IP_ADRESS)
+    VALUES ('ya.ru', 'good', '2001-11-29, '1994-11-29', true, 'OK', '123.16.30.10');
