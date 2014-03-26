@@ -17,20 +17,24 @@ public class AppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        WebApplicationContext context = getContext();
+    
+   // Листенер для управления жизненным циклом корневого контекста Spring   
+    	WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
+        
+  // Регистрация сервлета-диспетчера Spring MVC
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
         
-        //Filter UTF encoding
+    //Filter UTF encoding
         FilterRegistration charEncodingFilterReg =
         		servletContext.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
         charEncodingFilterReg.setInitParameter("encoding", "UTF-8");
         charEncodingFilterReg.setInitParameter("forceEncoding", "true");
         charEncodingFilterReg.addMappingForUrlPatterns(null, false, "/*");
         
-        //Filter SpringSecurity     
+    //Filter SpringSecurity     
         FilterRegistration springSecurityFilterReg =
         		servletContext.addFilter("securityFilter", DelegatingFilterProxy.class);
         springSecurityFilterReg.addMappingForUrlPatterns(null, false, "/*");
