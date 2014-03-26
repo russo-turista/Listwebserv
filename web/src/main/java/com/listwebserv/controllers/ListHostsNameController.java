@@ -61,14 +61,21 @@ public class ListHostsNameController {
 		response.setHeader("Refresh", "30");
 		/*System.out.println("hostName= " + servers.getHostName());
 		System.out.println("hostPort= " + servers.getHostPort());*/
-		logger.info("hostName= " + servers.getHostName());
-		logger.info("hostPort= " + servers.getHostPort());
+		/*logger.info("hostName= " + servers.getHostName());
+		logger.info("hostPort= " + servers.getHostPort());*/
 		
 		/*if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());
 			requestServers.listsServers(listHosts);
 		}		*/
 		model.addAttribute("hostNameList", servListService.getListServ());
+		
+		for (Servers item : servListService.getListServ()) {
+			logger.info("ipAdress: " + item.getIpAdress());
+			logger.info("hostName: " + item.getHostName());
+			
+		}
+		
 		    
 		return "hostsInfoList";
 	}

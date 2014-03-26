@@ -115,12 +115,7 @@ public class Servers {
 	public void setHostInfo(String hostInfo) {
 		this.hostInfo = hostInfo;
 	}
-	/*public String getIpAdress() {
-		return ipAdress;
-	}
-	public void setIpAdress(String ipAdress) {
-		this.ipAdress = ipAdress;
-	}*/
+	
 	/**
 	 * @return
 	 */

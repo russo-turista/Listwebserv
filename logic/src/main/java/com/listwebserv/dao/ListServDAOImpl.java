@@ -54,7 +54,7 @@ public class ListServDAOImpl implements ListServDAO {
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostInfo(rs.getString("ipAdress"));
+        	servers.setIpAdress(rs.getString("ipAdress"));
             return servers;
         }
     };
@@ -66,7 +66,7 @@ public class ListServDAOImpl implements ListServDAO {
 
 	
 	public void addServerName(String hostName, String ipAdress) {
-		sql = "insert into servList(hostName, ipAdress) values "
+		sql = "insert into server(hostName, ipAdress) values "
                 + "(:hostName, :ipAdress);";
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("hostName", hostName);
@@ -78,7 +78,7 @@ public class ListServDAOImpl implements ListServDAO {
 
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName, ipAdress from servList";
+		sql = "SELECT hostName, ipAdress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	
