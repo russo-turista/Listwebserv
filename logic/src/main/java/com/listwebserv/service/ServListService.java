@@ -15,8 +15,8 @@ public class ServListService {
 	@Autowired
 	ListServDAO listServDAO;
 	
-	public void addServerName(String serverName, String hostInfo){
-		listServDAO.addServerName(serverName, hostInfo);
+	public void addServerName(String serverName){
+		listServDAO.addServerName(serverName);
 	}
 	
 	public List<Servers> getListServ(){

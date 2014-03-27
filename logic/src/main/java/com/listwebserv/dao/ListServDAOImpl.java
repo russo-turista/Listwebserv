@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -38,24 +39,26 @@ public class ListServDAOImpl implements ListServDAO {
      * переменная типа {@link JdbcTemplate} экземпляр класса
      * SimpleJdbcTemplate
      */
-    private JdbcTemplate jdbcTemplate;
+   // private JdbcTemplate jdbcTemplate;
 
     /**
      * Реализуем jdbcTemplate, передаем параметры соединения
      *
      * @param dataSource {@link DataSource}
      */
-    @Resource(name = "dataSource")
-    public void setDataSource(DataSource dataSource) {
+    //@Resource(name = "dataSource")
+    @Resource
+    private JdbcOperations jdbcTemplate;
+    
+    /*public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    }*/
 
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
     	
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostInfo(rs.getString("hostInfo"));
             return servers;
         }
     };
@@ -66,20 +69,19 @@ public class ListServDAOImpl implements ListServDAO {
 	}
 
 	
-	public void addServerName(String hostName, String hostInfo) {
-		sql = "insert into servList(hostName, hostInfo) values "
-                + "(:hostName, :hostInfo);";
+	public void addServerName(String hostName) {
+		/*sql = "insert into servList(hostName) values "
+                + "(:hostName)";
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("hostName", hostName);
-        parameters.put("hostInfo", hostInfo);
 
-        jdbcTemplate.update(sql, parameters);
-		
+        jdbcTemplate.update(sql, parameters);*/
+        jdbcTemplate.update("INSERT INTO servList(hostName) VALUES(?)", hostName);
 	}
 
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName, hostInfo from servList";
+		sql = "SELECT hostName from servList";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	

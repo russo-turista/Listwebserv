@@ -35,7 +35,7 @@ public class RequestServers  {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
 			//listHostsFull.put(entry.getKey(),servers.httpUrlServers(hostName, hostPort));
-			servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
+			servListService.addServerName(entry.getKey());
 		}
 		return listHostsFull;
 				

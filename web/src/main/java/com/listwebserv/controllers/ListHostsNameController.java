@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.listwebserv.domain.Servers;
-/*import com.listwebserv.logic.RequestServers;
+import com.listwebserv.logic.RequestServers;
 import com.listwebserv.service.ServListService;
-*/
+
 @Controller
 public class ListHostsNameController {
 	
@@ -32,11 +32,11 @@ public class ListHostsNameController {
 	@Autowired 
 	private Servers servers;
 	
-	/*@Autowired 
+	@Autowired 
 	private RequestServers requestServers;
 	
 	@Autowired 
-	private ServListService servListService;*/
+	private ServListService servListService;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -65,11 +65,11 @@ public class ListHostsNameController {
 		logger.info("hostName= " + servers.getHostName());
 		logger.info("hostPort= " + servers.getHostPort());
 		
-		/*if (servers.getHostName() != null && servers.getHostPort() != null){
+		if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());
 			requestServers.listsServers(listHosts);
-		}	*/	
-		model.addAttribute("hostNameList", servers);
+		}	
+		model.addAttribute("hostNameList", servListService.getListServ());
 		    
 		return "hostsInfoList";
 	}

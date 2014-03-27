@@ -11,7 +11,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
 @EnableWebMvc
-@Import({ViewTemplateConfig.class})
+@Import({ViewTemplateConfig.class, JdbcConfig.class})
 @ComponentScan(basePackages = "com.listwebserv.*")
 class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
