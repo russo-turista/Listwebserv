@@ -15,11 +15,11 @@ public class ServListService {
 	@Autowired
 	ListServDAO listServDAO;
 	
-	public void addServerName(String serverName){
-		listServDAO.addServerName(serverName);
+	public void addServerName(String serverName, String ipAdress){
+		listServDAO.addServerName(serverName, ipAdress);
 	}
-	
+
 	public List<Servers> getListServ(){
 		return listServDAO.getListServ();
-	}; 
+	};
 }

@@ -11,7 +11,7 @@ public interface ListServDAO {
 
 	public void addUser(String user, String password);
 	
-	public void addServerName(String serverName); 
+	public void addServerName(String serverName, String ipAdress); 
 	
 	public List<Servers> getListServ(); 
 }    

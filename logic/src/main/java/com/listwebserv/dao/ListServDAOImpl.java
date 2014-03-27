@@ -4,6 +4,7 @@
  */
 package com.listwebserv.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -55,34 +56,43 @@ public class ListServDAOImpl implements ListServDAO {
     }*/
 
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
-    	
+
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
+        	servers.setIpAdress(rs.getString("ipAdress"));
             return servers;
         }
     };
-    
+
 	public void addUser(String user, String password) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
-	public void addServerName(String hostName) {
-		/*sql = "insert into servList(hostName) values "
-                + "(:hostName)";
+
+	public void addServerName(String hostName, String ipAdress) {
+		/*sql = "insert into server(hostName, ipAdress) values "
+                + "(:hostName, :ipAdress);";
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("hostName", hostName);
+        parameters.put("ipAdress", ipAdress);
 
         jdbcTemplate.update(sql, parameters);*/
+        jdbcTemplate.update("INSERT INTO server(HOSTNAME, RESPONSE_HOST, LAST_CHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)", hostName, "good", new Date(2014, 03,10), new Date(2014, 03,12), true, "OK", ipAdress);
+	}
+
+	/*
+	public void addServerName(String hostName) {
+
         jdbcTemplate.update("INSERT INTO servList(hostName) VALUES(?)", hostName);
 	}
 
+	 */
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName from servList";
+		sql = "SELECT hostName, ipAdress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
-	}
+	}      
 	
 }

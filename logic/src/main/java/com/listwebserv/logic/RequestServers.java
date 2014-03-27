@@ -34,8 +34,7 @@ public class RequestServers  {
 		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
-			//listHostsFull.put(entry.getKey(),servers.httpUrlServers(hostName, hostPort));
-			servListService.addServerName(entry.getKey());
+		        servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
 		}
 		return listHostsFull;
 				
