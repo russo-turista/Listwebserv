@@ -2,15 +2,17 @@ package com.listwebserv.settings.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-@EnableWebMvc
-@ComponentScan(basePackages = {"com.listwebserv.settings.config"})
 @Configuration
+@EnableWebMvc
+@Import({ViewTemplateConfig.class})
+@ComponentScan(basePackages = "com.listwebserv.*")
 class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	//same in XML <mvc:resources mapping="/resources/**" location="/public-resources/"/>

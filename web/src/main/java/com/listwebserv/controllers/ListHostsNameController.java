@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
@@ -20,22 +21,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.listwebserv.domain.Servers;
-import com.listwebserv.logic.RequestServers;
+/*import com.listwebserv.logic.RequestServers;
 import com.listwebserv.service.ServListService;
-
+*/
 @Controller
 public class ListHostsNameController {
 	
 	private static final Logger logger = Logger.getLogger(ListHostsNameController.class);
 	
-	@Inject 
+	@Autowired 
 	private Servers servers;
 	
-	@Inject 
+	/*@Autowired 
 	private RequestServers requestServers;
 	
-	@Inject
-	private ServListService servListService;
+	@Autowired 
+	private ServListService servListService;*/
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -64,11 +65,11 @@ public class ListHostsNameController {
 		logger.info("hostName= " + servers.getHostName());
 		logger.info("hostPort= " + servers.getHostPort());
 		
-		if (servers.getHostName() != null && servers.getHostPort() != null){
+		/*if (servers.getHostName() != null && servers.getHostPort() != null){
 			listHosts.put(servers.getHostName(),servers.getHostPort());
 			requestServers.listsServers(listHosts);
-		}		
-		model.addAttribute("hostNameList", servListService.getListServ());
+		}	*/	
+		model.addAttribute("hostNameList", servers);
 		    
 		return "hostsInfoList";
 	}

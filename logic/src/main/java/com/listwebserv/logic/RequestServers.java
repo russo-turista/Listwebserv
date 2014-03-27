@@ -9,16 +9,17 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.listwebserv.service.ServListService;
 
 @Component
 public class RequestServers  {
-	@Inject
+	@Autowired
 	private HostServers servers;
 	
-	@Inject
+	@Autowired
 	private ServListService servListService;
 	
 	private String hostName;

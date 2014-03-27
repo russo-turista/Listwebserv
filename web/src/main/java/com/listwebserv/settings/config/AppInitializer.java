@@ -1,4 +1,5 @@
-package com.listwebserv.settings.initializer;
+package com.listwebserv.settings.config;
+
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
@@ -17,34 +18,34 @@ public class AppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-    
-   // Листенер для управления жизненным циклом корневого контекста Spring   
-    	WebApplicationContext context = getContext();
-        servletContext.addListener(new ContextLoaderListener(context));
+    System.out.println("Initializer");
+   
+    	AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+    	ctx.register(WebMvcConfig.class);
+    	ctx.setDisplayName("WebListServ");
+    	
+  // Листенер для управления жизненным циклом корневого контекста Spring  
+        servletContext.addListener(new ContextLoaderListener(ctx));
         
   // Регистрация сервлета-диспетчера Spring MVC
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+        //ctx.setServletContext(servletContext);
+        ServletRegistration.Dynamic servlet = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(ctx));
+        servlet.setLoadOnStartup(1);
+        servlet.addMapping("/");
         
     //Filter UTF encoding
-        FilterRegistration charEncodingFilterReg =
+        FilterRegistration.Dynamic charEncodingFilterReg =
         		servletContext.addFilter("CharacterEncodingFilter", CharacterEncodingFilter.class);
         charEncodingFilterReg.setInitParameter("encoding", "UTF-8");
         charEncodingFilterReg.setInitParameter("forceEncoding", "true");
         charEncodingFilterReg.addMappingForUrlPatterns(null, false, "/*");
         
     //Filter SpringSecurity     
-        FilterRegistration springSecurityFilterReg =
-        		servletContext.addFilter("securityFilter", DelegatingFilterProxy.class);
-        springSecurityFilterReg.addMappingForUrlPatterns(null, false, "/*");
         
-    }
-
-    private AnnotationConfigWebApplicationContext getContext() {
-        AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("com.listwebserv.settings.config");
-        return context;
+        /*FilterRegistration.Dynamic springSecurityFilterChain = 
+  				servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
+  		springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");*/
+        
     }
 
 }

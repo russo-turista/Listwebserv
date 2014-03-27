@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -28,7 +29,7 @@ import com.listwebserv.domain.Servers;
 public class ListServDAOImpl implements ListServDAO {
 
     
-    @Inject
+	@Autowired 
     private Servers servers;
     
     private String sql = "";

@@ -20,7 +20,7 @@
      <#list hostNameList as hostNameValue>
     <tr>
         <td>${hostNameValue.hostName}</td>
-       <td>${hostNameValue.hostInfo}</td>
+       <td>${hostNameValue.hostPort}</td>
     </tr>
     </#list>           
   </table>
