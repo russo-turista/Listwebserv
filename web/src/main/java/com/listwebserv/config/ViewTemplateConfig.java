@@ -1,4 +1,4 @@
-package com.listwebserv.settings.config;
+package com.listwebserv.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

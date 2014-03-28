@@ -1,4 +1,4 @@
-package com.listwebserv.settings.config;
+package com.listwebserv.config;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;

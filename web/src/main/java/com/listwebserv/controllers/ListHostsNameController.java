@@ -58,8 +58,7 @@ public class ListHostsNameController {
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		
 		response.setHeader("Refresh", "30");
-		/*System.out.println("hostName= " + servers.getHostName());
-		System.out.println("hostPort= " + servers.getHostPort());*/
+		
 		logger.info("hostName= " + servers.getHostName());
 		logger.info("hostPort= " + servers.getHostPort());
 		
