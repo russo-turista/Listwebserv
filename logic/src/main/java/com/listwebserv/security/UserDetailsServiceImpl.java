@@ -22,10 +22,10 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
  
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         // с помощью нашего сервиса UserService получаем User
-        User user = userService.getUser("colibri");
+        User user = userService.getUser("admin");
         // указываем роли для этого пользователя
         Set<GrantedAuthority> roles = new HashSet();
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
+        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.name()));
  
         // на основании полученныйх даных формируем объект UserDetails
         // который позволит проверить введеный пользователем логин и пароль

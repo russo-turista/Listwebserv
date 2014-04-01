@@ -16,14 +16,13 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class AppInitializer implements WebApplicationInitializer {
 
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+	  @Override
+   public void onStartup(ServletContext servletContext) throws ServletException {
     System.out.println("Initializer");
    
     	AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-    	ctx.register(WebMvcConfig.class);
     	ctx.setDisplayName("WebListServ");
-    	
+    	ctx.register(WebMvcConfig.class, JdbcConfig.class, SecurityConfig.class);
   // Листенер для управления жизненным циклом корневого контекста Spring  
         servletContext.addListener(new ContextLoaderListener(ctx));
         
@@ -42,9 +41,9 @@ public class AppInitializer implements WebApplicationInitializer {
         
     //Filter SpringSecurity     
         
-        /*FilterRegistration.Dynamic springSecurityFilterChain = 
+        FilterRegistration.Dynamic springSecurityFilterChain = 
   				servletContext.addFilter("springSecurityFilterChain", DelegatingFilterProxy.class);
-  		springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");*/
+  		springSecurityFilterChain.addMappingForUrlPatterns(null, false, "/*");
         
     }
 

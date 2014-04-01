@@ -16,7 +16,7 @@ import com.listwebserv.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvc
-@Import({ViewTemplateConfig.class, JdbcConfig.class})
+@Import({ViewTemplateConfig.class})
 @ComponentScan(basePackages = "com.listwebserv.*")
 class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
@@ -33,10 +33,7 @@ class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	// Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
     // Это можно вынести в WebAppConfig, но для понимаемости оставил тут
-    @Bean
-    public ShaPasswordEncoder getShaPasswordEncoder(){
-        return new ShaPasswordEncoder();
-    }
+    
     
     @Bean
     public UserDetailsService getUserDetailsService(){
