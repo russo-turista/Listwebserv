@@ -14,4 +14,9 @@ public class UserServiceImpl implements UserService  {
  
         return user;
     }
+
+	@Override
+	public  void setUser(User user) {
+		
+	}
 }

@@ -43,11 +43,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                // указываем правила запросов
 	                // по которым будет определятся доступ к ресурсам и остальным данным
 	                .authorizeRequests()
-	                .antMatchers("/resources/**", "/**").permitAll()
-	                .anyRequest().permitAll()
-	                .and();
+	                .antMatchers("/resources/**").permitAll()
+	                .anyRequest().authenticated()
+	                .and()
 	 
-	        http.formLogin()
+	           .formLogin()
 	                // указываем страницу с формой логина
 	                .loginPage("/login")
 	                // указываем action с формы логина
@@ -58,9 +58,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .usernameParameter("j_username")
 	                .passwordParameter("j_password")
 	                // даем доступ к форме логина всем
-	                .permitAll();
-	        System.out.println("Add secutity config formLogin");
-	        http.logout()
+	                .permitAll()
+	                .and()
+	           .logout()
 	                // разрешаем делать логаут всем
 	                .permitAll()
 	                // указываем URL логаута
@@ -72,9 +72,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        System.out.println("Add secutity config logout");
 	 
 	    }
-	    
 	    @Bean
 	    public ShaPasswordEncoder getShaPasswordEncoder(){
 	        return new ShaPasswordEncoder();
 	    }
 }
+/*public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    public void registerGlobalAuthentication(
+            AuthenticationManagerBuilder auth) throws Exception {
+        auth
+            .inMemoryAuthentication()
+                .withUser("user").password("password").roles("USER");
+    }
+}*/

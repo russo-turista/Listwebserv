@@ -20,7 +20,7 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
 	@Autowired
     private UserService userService;
  
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // с помощью нашего сервиса UserService получаем User
         User user = userService.getUser("admin");
         // указываем роли для этого пользователя

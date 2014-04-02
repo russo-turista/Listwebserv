@@ -4,12 +4,11 @@
  */
 package com.listwebserv.dao;
 
-import java.sql.Date;
+import java.security.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -22,6 +21,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.User;
 
 /**
  *
@@ -33,6 +33,8 @@ public class ListServDAOImpl implements ListServDAO {
     
 	@Autowired 
     private Servers servers;
+	@Autowired
+	private User user;
     
     private String sql = "";
     
@@ -64,11 +66,19 @@ public class ListServDAOImpl implements ListServDAO {
             return servers;
         }
     };
+    private RowMapper<User> rowMapperUser = new RowMapper<User>() {
 
-	public void addUser(String user, String password) {
-		// TODO Auto-generated method stub
-
-	}
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	user = new User();
+        	user.setName(rs.getString("name"));
+        	user.setLogin(rs.getString("login"));
+        	user.setAdmin(rs.getBoolean("admin"));
+        	user.setActive(rs.getBoolean("active"));
+        	user.setPassword(rs.getString("password"));
+        	
+            return user;
+        }
+    };
 
 
 	public void addServerName(String hostName, String ipAdress) {
@@ -79,20 +89,25 @@ public class ListServDAOImpl implements ListServDAO {
         parameters.put("ipAdress", ipAdress);
 
         jdbcTemplate.update(sql, parameters);*/
-        jdbcTemplate.update("INSERT INTO server(HOSTNAME, RESPONSE_HOST, LAST_CHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)", hostName, "good", new Date(2014, 03,10), new Date(2014, 03,12), true, "OK", ipAdress);
+		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)";
+        jdbcTemplate.update(sql, hostName, "good", new Date(), new Date(2014, 03,12), true, "OK", ipAdress);
+	}
+	
+	public void addUser(String name, String login, String password, String email, Timestamp created, Timestamp lastLogin, boolean active, boolean admin){
+		sql = "INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)VALUES(?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sql,name, login, password, email, new Date(), new Date(), active, admin);		
 	}
 
-	/*
-	public void addServerName(String hostName) {
-
-        jdbcTemplate.update("INSERT INTO servList(hostName) VALUES(?)", hostName);
+	
+	public List<User> getListUser() {
+		sql = "SELECT NAME, LOGIN, ADMIN from users";
+		return jdbcTemplate.query(sql, rowMapperUser);
 	}
-
-	 */
 	
 	public List<Servers> getListServ() {
 		sql = "SELECT hostName, ipAdress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
-	}      
+	}
+   
 	
 }

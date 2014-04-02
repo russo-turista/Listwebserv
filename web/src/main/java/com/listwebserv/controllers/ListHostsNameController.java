@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.listwebserv.dao.ListServDAO;
 import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.User;
 import com.listwebserv.logic.RequestServers;
 import com.listwebserv.service.ServListService;
 
@@ -35,6 +37,9 @@ public class ListHostsNameController {
 	
 	@Autowired 
 	private ServListService servListService;
+	
+	@Autowired
+	ListServDAO listServDAO;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -70,5 +75,19 @@ public class ListHostsNameController {
 		    
 		return "hostsInfoList";
 	}
+	
+	@RequestMapping(value = "/addUser")
+	public String setUser(ModelMap model) {
+		model.addAttribute("servers", servers);
+		
+		System.out.println("AddEUser!!!!!!!!!");
+		return "addUser";
+	}
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	public String getUser(ModelMap model, @ModelAttribute("user") User user) {
+		listServDAO.
+		return "addUser";
+	}
+	
 
 }
