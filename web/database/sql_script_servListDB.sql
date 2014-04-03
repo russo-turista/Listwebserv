@@ -40,8 +40,8 @@ CREATE TABLE userLists(
     PRIMARY KEY (IDUSER, IDSERVER)
 );
 
-INSERT INTO employee (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LAST_LOGIN, ACTIVE, ADMIN)
-    VALUES ('Vasya', 'ytug', 'ttttsle', 'ytug@mail.ru', '1994-11-29', '2014-03-20', true, true);
+INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)
+    VALUES ('Vasya', 'admin', 'admin', 'admin@mail.ru', '1994-11-29', '2014-03-20', true, true);
 
 INSERT INTO server (HOSTNAME, RESPONSE_HOST, LAST_CHECK, CREATED, ACTIVE, STATE, IP_ADRESS )
     VALUES ('ya.ru', 'good', '2014-03-19', '2014-03-01', true, 'OK', '10.12.12.1');

@@ -39,4 +39,9 @@ class WebMvcConfig extends WebMvcConfigurerAdapter {
     public UserDetailsService getUserDetailsService(){
         return new UserDetailsServiceImpl();
     }
+    
+    @Bean
+    public ShaPasswordEncoder passwordEncoder(){
+        return new ShaPasswordEncoder(256);
+    }
 }

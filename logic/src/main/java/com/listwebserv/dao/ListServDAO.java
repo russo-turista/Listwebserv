@@ -1,7 +1,7 @@
 
 package com.listwebserv.dao;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +17,8 @@ public interface ListServDAO {
 	
 	public List<Servers> getListServ(); 
 	
-	public List<User> getListUser();
+	public User getUniqueUser(String login);
+	
 	
 	
 }    

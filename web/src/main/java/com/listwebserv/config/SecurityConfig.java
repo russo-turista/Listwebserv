@@ -22,15 +22,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	 @Autowired
 	    private UserDetailsServiceImpl userDetailsService;
 	 @Autowired 
-	 	private ShaPasswordEncoder shaPasswordEncoder;
+	 	private ShaPasswordEncoder passwordEncoder;
+	 
 
 	    // регистрируем нашу реализацию UserDetailsService 
-	    // а также PasswordEncoder для приведения пароля в формат SHA1
+	    // а также PasswordEncoder для приведения пароля в формат SHA
 	    @Autowired
 	    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-	        auth
-	                .userDetailsService(userDetailsService)
-	                .passwordEncoder(getShaPasswordEncoder());
+	        auth    
+	                .userDetailsService(userDetailsService);
+	                
 	        System.out.println("registerGlobalAuthentication");
 	    }
 	 
@@ -71,10 +72,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	                .invalidateHttpSession(true);
 	        System.out.println("Add secutity config logout");
 	 
-	    }
-	    @Bean
-	    public ShaPasswordEncoder getShaPasswordEncoder(){
-	        return new ShaPasswordEncoder();
 	    }
 }
 /*public class SecurityConfig extends WebSecurityConfigurerAdapter {

@@ -4,19 +4,16 @@
  */
 package com.listwebserv.dao;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.*;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -49,7 +46,6 @@ public class ListServDAOImpl implements ListServDAO {
      *
      * @param dataSource {@link DataSource}
      */
-    //@Resource(name = "dataSource")
     @Resource
     private JdbcOperations jdbcTemplate;
     
@@ -82,32 +78,24 @@ public class ListServDAOImpl implements ListServDAO {
 
 
 	public void addServerName(String hostName, String ipAdress) {
-		/*sql = "insert into server(hostName, ipAdress) values "
-                + "(:hostName, :ipAdress);";
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("hostName", hostName);
-        parameters.put("ipAdress", ipAdress);
-
-        jdbcTemplate.update(sql, parameters);*/
 		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)";
         jdbcTemplate.update(sql, hostName, "good", new Date(), new Date(2014, 03,12), true, "OK", ipAdress);
 	}
 	
 	public void addUser(String name, String login, String password, String email, Timestamp created, Timestamp lastLogin, boolean active, boolean admin){
-		sql = "INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)VALUES(?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql,name, login, password, email, new Date(), new Date(), active, admin);		
+		sql = "INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)VALUES(?,?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sql,name, login, password, email, created, lastLogin, active, admin);		
 	}
 
 	
-	public List<User> getListUser() {
-		sql = "SELECT NAME, LOGIN, ADMIN from users";
-		return jdbcTemplate.query(sql, rowMapperUser);
+	public User getUniqueUser(String login) {
+		sql = "SELECT * FROM users WHERE LOGIN = ?";
+		return jdbcTemplate.queryForObject(sql, rowMapperUser, login);    
 	}
 	
 	public List<Servers> getListServ() {
 		sql = "SELECT hostName, ipAdress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
-   
 	
 }

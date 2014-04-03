@@ -18,14 +18,22 @@ import com.listwebserv.security.enums.UserRoleEnum;
 public class UserDetailsServiceImpl  implements UserDetailsService {
 	
 	@Autowired
+	private User user;
+	@Autowired
     private UserService userService;
  
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         // с помощью нашего сервиса UserService получаем User
-        User user = userService.getUser("admin");
-        // указываем роли для этого пользователя
+        user = userService.getUser(login);
+        // указываем роли для этого пользовател
+        System.out.println("Login: " + login + "  " + user.getLogin());
+        System.out.println("user.getAdmin(): " + user.getAdmin() + "  " + UserRoleEnum.ADMIN.name());
+        System.out.println("user.getPassword(): " + user.getPassword());
+        
+        
         Set<GrantedAuthority> roles = new HashSet();
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.name()));
+        roles.add(new SimpleGrantedAuthority( user.getAdmin() ? UserRoleEnum.ADMIN.name()
+        														: UserRoleEnum.USER.name()));
  
         // на основании полученныйх даных формируем объект UserDetails
         // который позволит проверить введеный пользователем логин и пароль

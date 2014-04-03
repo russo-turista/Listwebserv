@@ -7,10 +7,10 @@
 </head>
 <body>
 	<div class="container" style="width: 300px;">
-    <form action="${link.contextURL}/j_spring_security_check" method="post">
+    <form action="<@spring.url '/j_spring_security_check'/>" method="post">
         <h2>Please sign in</h2>      
-        <input type="text" class="form-control" name="j_username" placeholder="Email address" required autofocus value="colibri">
-        <input type="password" class="form-control" name="j_password" placeholder="Password" required value="1234">
+        <input type="text" class="form-control" name="j_username" placeholder="login" required autofocus >
+        <input type="password" class="form-control" name="j_password" placeholder="password" >
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
    
     </form>
