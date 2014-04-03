@@ -4,21 +4,21 @@
  */
 package com.listwebserv.dao;
 
+import java.sql.Timestamp;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.User;
 
 /**
  *
@@ -28,57 +28,73 @@ import com.listwebserv.domain.Servers;
 public class ListServDAOImpl implements ListServDAO {
 
     
-    @Inject
+	@Autowired 
     private Servers servers;
+	@Autowired
+	private User user;
     
     private String sql = "";
     
     /**
-     * переменная типа {@link SimpleJdbcTemplate} экземпляр класса
+     * переменная типа {@link JdbcTemplate} экземпляр класса
      * SimpleJdbcTemplate
      */
-    private SimpleJdbcTemplate jdbcTemplate;
+   // private JdbcTemplate jdbcTemplate;
 
     /**
      * Реализуем jdbcTemplate, передаем параметры соединения
      *
      * @param dataSource {@link DataSource}
      */
-    @Resource(name = "dataSource")
-    public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new SimpleJdbcTemplate(dataSource);
-    }
+    @Resource
+    private JdbcOperations jdbcTemplate;
+    
+    /*public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }*/
 
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
-    	
+
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostInfo(rs.getString("hostInfo"));
+        	servers.setIpAdress(rs.getString("ipAdress"));
             return servers;
         }
     };
-    
-	public void addUser(String user, String password) {
-		// TODO Auto-generated method stub
-		
+    private RowMapper<User> rowMapperUser = new RowMapper<User>() {
+
+        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	user = new User();
+        	user.setName(rs.getString("name"));
+        	user.setLogin(rs.getString("login"));
+        	user.setAdmin(rs.getBoolean("admin"));
+        	user.setActive(rs.getBoolean("active"));
+        	user.setPassword(rs.getString("password"));
+        	
+            return user;
+        }
+    };
+
+
+	public void addServerName(String hostName, String ipAdress) {
+		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)";
+        jdbcTemplate.update(sql, hostName, "good", new Date(), new Date(2014, 03,12), true, "OK", ipAdress);
+	}
+	
+	public void addUser(String name, String login, String password, String email, Timestamp created, Timestamp lastLogin, boolean active, boolean admin){
+		sql = "INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)VALUES(?,?,?,?,?,?,?,?)";
+		jdbcTemplate.update(sql,name, login, password, email, created, lastLogin, active, admin);		
 	}
 
 	
-	public void addServerName(String hostName, String hostInfo) {
-		sql = "insert into servList(hostName, hostInfo) values "
-                + "(:hostName, :hostInfo);";
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        parameters.put("hostName", hostName);
-        parameters.put("hostInfo", hostInfo);
-
-        jdbcTemplate.update(sql, parameters);
-		
+	public User getUniqueUser(String login) {
+		sql = "SELECT * FROM users WHERE LOGIN = ?";
+		return jdbcTemplate.queryForObject(sql, rowMapperUser, login);    
 	}
-
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName, hostInfo from servList";
+		sql = "SELECT hostName, ipAdress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	

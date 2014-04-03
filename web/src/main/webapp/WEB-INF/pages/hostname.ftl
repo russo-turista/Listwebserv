@@ -15,13 +15,15 @@
   
   <table> 
   <tr>
-   <th>
+   <td>
     Add address:  <@spring.formInput "servers.hostName"/> <br/>
-   </th>
-   <th>
+   </td>
+  </tr> 
+  <tr>
+   <td>
     Add port: <@spring.formInput "servers.hostPort" /> <br/>
-   </th>
-    </tr>
+   </td>
+  </tr>
    </table>
     <input type="submit" value="Send" />
   </form>

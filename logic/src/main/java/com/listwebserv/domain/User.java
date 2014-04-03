@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Класс сущности User
  */
 @Component
-public class Employee {
+public class User {
 	
 	/**
 	 *  Уникальный идентификатор сущности в системе

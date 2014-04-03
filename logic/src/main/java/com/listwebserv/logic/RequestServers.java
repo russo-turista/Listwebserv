@@ -9,16 +9,17 @@ import java.util.Map.Entry;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.listwebserv.service.ServListService;
 
 @Component
 public class RequestServers  {
-	@Inject
+	@Autowired
 	private HostServers servers;
 	
-	@Inject
+	@Autowired
 	private ServListService servListService;
 	
 	private String hostName;
@@ -33,8 +34,7 @@ public class RequestServers  {
 		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
-			//listHostsFull.put(entry.getKey(),servers.httpUrlServers(hostName, hostPort));
-			servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
+		        servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
 		}
 		return listHostsFull;
 				
