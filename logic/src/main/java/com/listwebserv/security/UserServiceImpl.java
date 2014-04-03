@@ -28,8 +28,9 @@ public class UserServiceImpl implements UserService  {
     }
 
 	@Override
-	public  void setUser(User user) {		
-		listservDAO.addUser(user.getName(), user.getLogin(), user.getPassword(),
+	public  void setUser(User user) {	
+		
+		listservDAO.addUser(user.getName(), user.getLogin(), passwordEncoder.encodePassword(user.getPassword(), user.getName()),
 					user.getEmail(), new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()),
 				    user.getActive(),user.getAdmin());
 	}
