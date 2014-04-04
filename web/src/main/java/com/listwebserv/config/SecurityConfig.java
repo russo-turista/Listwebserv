@@ -2,13 +2,18 @@ package com.listwebserv.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
@@ -23,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    private UserDetailsServiceImpl userDetailsService;
 	 @Autowired 
 	 	private ShaPasswordEncoder passwordEncoder;
-	 
 
 	    // регистрируем нашу реализацию UserDetailsService 
 	    // а также PasswordEncoder для приведения пароля в формат SHA
@@ -32,7 +36,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	        auth    
 	                .userDetailsService(userDetailsService)
 	                .passwordEncoder(passwordEncoder);
-	                
 	        System.out.println("registerGlobalAuthentication");
 	    }
 	 
