@@ -10,9 +10,8 @@ public class Config {
 	 * Интервал опроса серверов в секундах.
 
 	 */
-	private int iterRequest;
-	
-	
+	private int timeRequest;
+
 	/**
 	 * Таймаут ожидания ответа сервера в секундах, 
 		по истечении которого считается, что сервер не 
@@ -24,13 +23,13 @@ public class Config {
 	 * Интервал обновления страницы на стороне 
 		клиента (в секундах).
 	 */
-	private int intUpdate;
+	private int timeUpdate;
 	
 	/**
 	 * Адрес SMTP-сервера для отправки почтовых 
 		сообщений.
 	 */
-	private String addersSMTP;
+	private String addressSMTP;
 	
 	
 	/**
@@ -39,13 +38,13 @@ public class Config {
 	private int portSMTP;
 
 
-	public int getIterRequest() {
-		return iterRequest;
+	public int getTimeRequest() {
+		return timeRequest;
 	}
 
 
-	public void setIterRequest(int iterRequest) {
-		this.iterRequest = iterRequest;
+	public void setTimeRequest(int timeRequest) {
+		this.timeRequest = timeRequest;
 	}
 
 
@@ -60,22 +59,22 @@ public class Config {
 
 
 	public int getIntUpdate() {
-		return intUpdate;
+		return timeUpdate;
 	}
 
 
 	public void setIntUpdate(int intUpdate) {
-		this.intUpdate = intUpdate;
+		this.timeUpdate = intUpdate;
 	}
 
 
 	public String getAddersSMTP() {
-		return addersSMTP;
+		return addressSMTP;
 	}
 
 
 	public void setAddersSMTP(String addersSMTP) {
-		this.addersSMTP = addersSMTP;
+		this.addressSMTP = addersSMTP;
 	}
 
 

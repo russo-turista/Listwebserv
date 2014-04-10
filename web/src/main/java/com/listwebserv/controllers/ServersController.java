@@ -22,27 +22,22 @@ import com.listwebserv.dao.ListServDAO;
 import com.listwebserv.domain.Servers;
 import com.listwebserv.domain.User;
 import com.listwebserv.logic.RequestServers;
-import com.listwebserv.security.UserService;
 import com.listwebserv.service.ServListService;
+import com.listwebserv.service.UserService;
 
 @Controller
-public class ListHostsNameController {
+public class ServersController {
 	
-	private static final Logger logger = Logger.getLogger(ListHostsNameController.class);
+	private static final Logger logger = Logger.getLogger(ServersController.class);
 	
 	@Autowired 
 	private Servers servers;
-	@Autowired
-	private User user;
+	
 	@Autowired 
 	private RequestServers requestServers;
 	
 	@Autowired 
 	private ServListService servListService;
-	
-	@Autowired
-	private UserService userService;
-	
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -79,22 +74,7 @@ public class ListHostsNameController {
 		return "hostsInfoList";
 	}
 	
-	@RequestMapping(value = "/addUser")
-	public String setUser(ModelMap model) {
-		model.addAttribute("user", user);
-		
-		System.out.println("AddEUser!!!!!!!!!");
-		return "addUser";
-	}
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String getUser(ModelMap model, @ModelAttribute("user") User user) {
-		System.out.println("user name: " + user.getName());
-		System.out.println("user login: " + user.getLogin());
-		System.out.println("user password: " + user.getPassword());
-		System.out.println("user active: " + user.getActive());
-		userService.setUser(user);
-		return "addUser";
-	}
+	
 	
 
 }

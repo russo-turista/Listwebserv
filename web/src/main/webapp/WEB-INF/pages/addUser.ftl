@@ -1,5 +1,4 @@
-<#import "spring.ftl" as spring />
-<#import "macro/formCheckbox.ftl" as formCheckbox />
+<#include '/include/header.ftl'>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <html>
 <head><title>List Hosts name</title>
@@ -8,8 +7,7 @@
 
 </div>
  
-<div id="content">
-     
+
   <fieldset>
     <legend>Host Inf</legend>
   <form action="addUser" method="POST">

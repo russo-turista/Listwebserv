@@ -4,6 +4,8 @@ import java.security.Timestamp;
 
 import org.springframework.stereotype.Component;
 
+import com.listwebserv.service.enums.ServersStatusEnum;
+
 /**
  * @author fgm
  *
@@ -54,12 +56,12 @@ public class Servers {
     /**
      * Последнее состояние.
      */
-    private Enum state; 
+    private ServersStatusEnum state; 
     
     /**
      * IP-адрес или имя хоста.
      */
-    private String ipAdress;
+    private String ipAddress;
     
     private String hostInfo;
     
@@ -93,17 +95,17 @@ public class Servers {
 	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
-	public Enum getState() {
+	public ServersStatusEnum getState() {
 		return state;
 	}
-	public void setState(Enum state) {
+	public void setState(ServersStatusEnum state) {
 		this.state = state;
 	}
-	public String getIpAdress() {
-		return ipAdress;
+	public String getIpAddress() {
+		return ipAddress;
 	}
-	public void setIpAdress(String ipAdress) {
-		this.ipAdress = ipAdress;
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
     
 	public String getHostInfo() {

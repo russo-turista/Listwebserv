@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
 
-import com.listwebserv.security.UserDetailsServiceImpl;
+import com.listwebserv.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvcSecurity
@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    // а также PasswordEncoder для приведения пароля в формат SHA
 	    @Autowired
 	    public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-	        auth   
+	        auth  
 	                .userDetailsService(userDetailsService)
 	        		.passwordEncoder(passwordEncoder);
 	                
