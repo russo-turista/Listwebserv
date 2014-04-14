@@ -1,4 +1,4 @@
-package com.listwebserv.security;
+package com.listwebserv.service;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.listwebserv.domain.User;
-import com.listwebserv.security.enums.UserRoleEnum;
+import com.listwebserv.service.enums.UserRoleEnum;
 
 @Service
 public class UserDetailsServiceImpl  implements UserDetailsService {
@@ -45,4 +45,5 @@ public class UserDetailsServiceImpl  implements UserDetailsService {
  
         return userDetails;
     }
+   
 }

@@ -1,4 +1,4 @@
-package com.listwebserv.security;
+package com.listwebserv.service;
 
 import com.listwebserv.domain.User;
 

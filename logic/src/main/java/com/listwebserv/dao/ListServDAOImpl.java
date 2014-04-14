@@ -58,7 +58,7 @@ public class ListServDAOImpl implements ListServDAO {
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
         	servers = new Servers();
         	servers.setHostName(rs.getString("hostName"));
-        	servers.setIpAdress(rs.getString("ipAdress"));
+        	servers.setIpAddress(rs.getString("ipAddress"));
             return servers;
         }
     };
@@ -78,7 +78,7 @@ public class ListServDAOImpl implements ListServDAO {
 
 
 	public void addServerName(String hostName, String ipAdress) {
-		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADRESS) VALUES(?,?,?,?,?,?::state_type,?)";
+		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADDRESS) VALUES(?,?,?,?,?,?::state_type,?)";
         jdbcTemplate.update(sql, hostName, "good", new Date(), new Date(2014, 03,12), true, "OK", ipAdress);
 	}
 	
@@ -87,14 +87,13 @@ public class ListServDAOImpl implements ListServDAO {
 		jdbcTemplate.update(sql,name, login, password, email, created, lastLogin, active, admin);		
 	}
 
-	
 	public User getUniqueUser(String login) {
 		sql = "SELECT * FROM users WHERE LOGIN = ?";
 		return jdbcTemplate.queryForObject(sql, rowMapperUser, login);    
 	}
 	
 	public List<Servers> getListServ() {
-		sql = "SELECT hostName, ipAdress from server";
+		sql = "SELECT hostName, ipAddress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 	

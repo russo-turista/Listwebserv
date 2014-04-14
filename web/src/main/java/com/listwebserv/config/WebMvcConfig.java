@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-import com.listwebserv.security.UserDetailsServiceImpl;
+import com.listwebserv.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebMvc
@@ -44,4 +45,5 @@ class WebMvcConfig extends WebMvcConfigurerAdapter {
     public ShaPasswordEncoder passwordEncoder(){
         return new ShaPasswordEncoder(256);
     }
+    
 }

@@ -1,4 +1,4 @@
-package com.listwebserv.security.enums;
+package com.listwebserv.service.enums;
 
 public enum UserRoleEnum {
 	ADMIN,

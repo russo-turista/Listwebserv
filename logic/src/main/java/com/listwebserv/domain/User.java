@@ -125,7 +125,7 @@ public class User {
 	}
 
 
-	public void setLast_Login(Timestamp lastLogin) {
+	public void setLastLogin(Timestamp lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 
