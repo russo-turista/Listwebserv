@@ -17,6 +17,7 @@ CREATE TABLE server (
 	created		    TIMESTAMP   		      NOT NULL,
 	active	        BOOLEAN                   NOT NULL,
 	state			STATE_TYPE				  NOT NULL,
+	response			TEXT,
 	ipAddress		VARCHAR(128)			  NOT NULL
 
 );
