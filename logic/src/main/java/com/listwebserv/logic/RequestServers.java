@@ -17,7 +17,7 @@ import com.listwebserv.service.ServListService;
 @Component
 public class RequestServers  {
 	@Autowired
-	private HostServers servers;
+	private HTTPConnService httpConnService;
 	
 	@Autowired
 	private ServListService servListService;
@@ -34,7 +34,7 @@ public class RequestServers  {
 		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
-		        servListService.addServerName(entry.getKey(), servers.httpUrlServers(hostName, hostPort));
+		        servListService.addServerName(entry.getKey(), httpConnService.httpUrlServers(hostName, hostPort));
 		}
 		return listHostsFull;
 				

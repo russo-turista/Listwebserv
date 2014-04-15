@@ -9,14 +9,14 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.UserDataHandler;
 
-import com.listwebserv.dao.ListServDAO;
+import com.listwebserv.dao.ServersDAO;
 import com.listwebserv.domain.User;
 
 @Service
 public class UserServiceImpl implements UserService  {
 
 	@Autowired
-	private ListServDAO listservDAO;
+	private ServersDAO listservDAO;
 	@Autowired 
 	private ShaPasswordEncoder passwordEncoder;
 	@Autowired

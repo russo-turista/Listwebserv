@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class HostServers {
+public class HTTPConnService {
 	public StringBuilder stringTableBuild = new StringBuilder();
 	public static final  String PROTOCOL = "HTTP";
 	private Map <String, Object> hostInfo = new HashMap<String, Object>();

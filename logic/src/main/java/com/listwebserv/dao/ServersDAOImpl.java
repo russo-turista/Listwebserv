@@ -22,16 +22,15 @@ import com.listwebserv.domain.User;
 
 /**
  *
- * Реализация интрефейса {@link ListServDAO}
+ * Реализация интрефейса {@link ServersDAO}
  */
 @Repository
-public class ListServDAOImpl implements ListServDAO {
+public class ServersDAOImpl implements ServersDAO {
 
     
 	@Autowired 
     private Servers servers;
-	@Autowired
-	private User user;
+
     
     private String sql = "";
     
@@ -48,11 +47,7 @@ public class ListServDAOImpl implements ListServDAO {
      */
     @Resource
     private JdbcOperations jdbcTemplate;
-    
-    /*public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }*/
-
+  
     private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
 
         public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -62,39 +57,17 @@ public class ListServDAOImpl implements ListServDAO {
             return servers;
         }
     };
-    private RowMapper<User> rowMapperUser = new RowMapper<User>() {
 
-        public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	user = new User();
-        	user.setName(rs.getString("name"));
-        	user.setLogin(rs.getString("login"));
-        	user.setAdmin(rs.getBoolean("admin"));
-        	user.setActive(rs.getBoolean("active"));
-        	user.setPassword(rs.getString("password"));
-        	
-            return user;
-        }
-    };
-
-
-	public void addServerName(String hostName, String ipAdress) {
+	public void addServer(String hostName, String ipAdress) {
 		sql = "INSERT INTO server(HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, IPADDRESS) VALUES(?,?,?,?,?,?::state_type,?)";
         jdbcTemplate.update(sql, hostName, "good", new Date(), new Date(2014, 03,12), true, "OK", ipAdress);
 	}
 	
-	public void addUser(String name, String login, String password, String email, Timestamp created, Timestamp lastLogin, boolean active, boolean admin){
-		sql = "INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)VALUES(?,?,?,?,?,?,?,?)";
-		jdbcTemplate.update(sql,name, login, password, email, created, lastLogin, active, admin);		
-	}
-
-	public User getUniqueUser(String login) {
-		sql = "SELECT * FROM users WHERE LOGIN = ?";
-		return jdbcTemplate.queryForObject(sql, rowMapperUser, login);    
-	}
 	
 	public List<Servers> getListServ() {
 		sql = "SELECT hostName, ipAddress from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
+
 	
 }

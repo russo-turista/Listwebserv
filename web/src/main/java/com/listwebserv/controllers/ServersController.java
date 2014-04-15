@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.listwebserv.dao.ListServDAO;
+import com.listwebserv.dao.ServersDAO;
 import com.listwebserv.domain.Servers;
 import com.listwebserv.domain.User;
 import com.listwebserv.logic.RequestServers;
