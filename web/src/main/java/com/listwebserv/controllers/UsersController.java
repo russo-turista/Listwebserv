@@ -14,7 +14,7 @@ import com.listwebserv.service.UserService;
 @Controller
 public class UsersController {
 	
-	private static final Logger logger = Logger.getLogger(UsersController.class);
+	private  final Logger logger = Logger.getLogger(UsersController.class);
 	
 	@Autowired
 	private User user;

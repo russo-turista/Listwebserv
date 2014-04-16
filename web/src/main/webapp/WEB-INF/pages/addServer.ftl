@@ -11,7 +11,7 @@
      
   <fieldset>
     <legend>Host Inf</legend>
-  <form action="hostsInfoList" method="POST">
+  <form action="addServer" method="POST">
   
   <table> 
   <tr>
@@ -24,6 +24,11 @@
     Add port: <@spring.formInput "servers.hostPort" /> <br/>
    </td>
   </tr>
+	<tr>
+	<td>
+  	 Add is active: <@spring.formCheckbox "servers.active" "true"/> 
+  	</td>
+  </tr> 
    </table>
     <input type="submit" value="Send" />
   </form>

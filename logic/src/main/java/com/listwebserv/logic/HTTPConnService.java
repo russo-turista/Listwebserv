@@ -1,25 +1,25 @@
 package com.listwebserv.logic;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.listwebserv.domain.Servers;
 import com.listwebserv.service.enums.ServersStatusEnum;
 
 import java.net.*;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class HTTPConnService {
-	public StringBuilder stringTableBuild = new StringBuilder();
+	//public StringBuilder stringTableBuild = new StringBuilder();
 	public static final  String PROTOCOL = "HTTP";
-	private Map <String, Object> hostInfo = new HashMap<String, Object>();
+	//private Logger logger = Logger.getLogger(HTTPConnService.class);
 	
-	public Map<String, Object> httpUrlServers(String hostName, Integer hostPort, Integer timeOutWaiting )  {
+	
+	public Servers httpUrlServers(Servers server, Integer timeOutWaiting )  {
 		
 		
-		try{
-			
-			URL url = new URL(PROTOCOL, hostName, hostPort,"/");
+		try{			
+			URL url = new URL(PROTOCOL, server.getHostName(), server.getHostPort(),"/");
 			InetAddress address = InetAddress.getByName(url.getHost());	
 			HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
 			urlCon.setReadTimeout(timeOutWaiting);
@@ -27,24 +27,33 @@ public class HTTPConnService {
 			int status = urlCon.getResponseCode();
 			
 			if (status == HttpURLConnection.HTTP_OK){
-				hostInfo.put("status", ServersStatusEnum.OK.name());
+				//logger.info("status= " + status);
+				System.out.println("status= " + status);
+				server.setState(ServersStatusEnum.OK);
 			}
-			if (status != HttpURLConnection.HTTP_OK || status <= 500 ) {
-				hostInfo.put("status", ServersStatusEnum.WARN.name());
+			if (status != HttpURLConnection.HTTP_OK && status < 500 ) {
+				//logger.info("status= " + status);
+				System.out.println("status= " + status);
+				server.setState(ServersStatusEnum.WARN);
 			} 
 			if (status >= 500){
-				hostInfo.put("status", ServersStatusEnum.FAIL.name());
+				//logger.info("status= " + status);
+				System.out.println("status= " + status);
+				server.setState(ServersStatusEnum.FAIL);
 			}
 			
-			hostInfo.put("address", address.getHostAddress().toString());
-			hostInfo.put("response", urlCon.getResponseMessage());	
+			//hostInfo.put("address", address.getHostAddress().toString());
+			//hostInfo.put("response", urlCon.getResponseMessage());	
+			server.setIpAddress(address.getHostAddress().toString());
+			server.setResponse(urlCon.getResponseMessage());
 			
-			return hostInfo;
+			return server;
 			
 		} catch (Exception e) {
 			System.out.println("Error connection: " + e.getMessage());
-			hostInfo.put("status", ServersStatusEnum.FAIL.name());
-			return hostInfo;
+			//hostInfo.put("status", ServersStatusEnum.FAIL.name());
+			server.setState(ServersStatusEnum.FAIL);
+			return server;
 		}
 		
 	}

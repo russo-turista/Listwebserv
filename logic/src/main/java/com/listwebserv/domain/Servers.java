@@ -1,6 +1,6 @@
 package com.listwebserv.domain;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
@@ -36,7 +36,7 @@ public class Servers {
     /**
      * Заголовки последнего ответа сервера.
      */
-    private String responseHost;
+    private String response;
     
     /**
      * Время последней проверки состояния.
@@ -63,7 +63,6 @@ public class Servers {
      */
     private String ipAddress;
     
-    private String hostInfo;
     
     public Long getIdServer() {
 		return idServer;
@@ -77,11 +76,11 @@ public class Servers {
 	public void setUrlPath(String urlPath) {
 		this.urlPath = urlPath;
 	}
-	public String getResponseHost() {
-		return responseHost;
+	public String getResponse() {
+		return response;
 	}
-	public void setResponseHost(String responseHost) {
-		this.responseHost = responseHost;
+	public void setResponse(String response) {
+		this.response = response;
 	}
 	public Timestamp getLastCheck() {
 		return lastCheck;
@@ -108,15 +107,6 @@ public class Servers {
 		this.ipAddress = ipAddress;
 	}
     
-	public String getHostInfo() {
-		return hostInfo;
-	}
-	/**
-	 * @param hostInfo
-	 */
-	public void setHostInfo(String hostInfo) {
-		this.hostInfo = hostInfo;
-	}
 	/**
 	 * @return
 	 */

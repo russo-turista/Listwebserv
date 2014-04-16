@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.listwebserv.service.ServListService;
+import com.listwebserv.service.SeversService;
 
 @Component
 public class RequestServers  {
@@ -20,7 +20,7 @@ public class RequestServers  {
 	private HTTPConnService httpConnService;
 	
 	@Autowired
-	private ServListService servListService;
+	private SeversService seversService;
 	
 	private String hostName;
 	private Integer hostPort;
@@ -34,7 +34,8 @@ public class RequestServers  {
 		for (Entry<String, Integer> entry : listHosts.entrySet()) {
 			hostName = entry.getKey();
 			hostPort = entry.getValue();
-		        servListService.addServerName(entry.getKey(), httpConnService.httpUrlServers(hostName, hostPort));
+			//seversService.addServerName(entry.getKey(), httpConnService.httpUrlServers(hostName, hostPort));
+		//	seversService.setServers(servers);
 		}
 		return listHostsFull;
 				

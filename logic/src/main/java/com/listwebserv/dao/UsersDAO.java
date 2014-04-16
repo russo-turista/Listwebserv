@@ -11,7 +11,7 @@ import com.listwebserv.domain.User;
 
 public interface UsersDAO {
 
-	public void setUserDB(String name, String login, String password, String email, Timestamp created, Timestamp lastLogin, boolean active, boolean admin);
+	public void setUserDB(User user);
 	
 	public User getUserDB(String login);
 	

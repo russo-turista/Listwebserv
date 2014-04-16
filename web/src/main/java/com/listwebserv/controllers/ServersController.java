@@ -16,42 +16,49 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.listwebserv.dao.ServersDAO;
+
+
 import com.listwebserv.domain.Servers;
-import com.listwebserv.domain.User;
-import com.listwebserv.logic.RequestServers;
-import com.listwebserv.service.ServListService;
-import com.listwebserv.service.UserService;
+import com.listwebserv.service.SeversService;
+
 
 @Controller
 public class ServersController {
 	
-	private static final Logger logger = Logger.getLogger(ServersController.class);
+	private final Logger logger = Logger.getLogger(ServersController.class);
 	
 	@Autowired 
 	private Servers servers;
 	
 	@Autowired 
-	private RequestServers requestServers;
-	
-	@Autowired 
-	private ServListService servListService;
+	private SeversService seversService;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
 	
-	@RequestMapping(value = "/hostname")
-	public String addHost(/*@ModelAttribute("model")*/ ModelMap model/*, @RequestParam( value = "hostName", required = false) String hostName, @RequestParam( value = "hostPort", required = false) Integer hostPort */) {
+	@RequestMapping(value = "/addServer")
+	public String addServer(ModelMap model) {
 		model.addAttribute("servers", servers);
 		
 		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
-		return "hostname";
+		return "addServer";
 	}	
 	
+	@RequestMapping(value = "/addServer", method = RequestMethod.POST)
+	public String saveServer(ModelMap model, @ModelAttribute("servers") Servers servers, HttpServletRequest request,HttpServletResponse response) {
+		logger.info("hostName= " + servers.getHostName());
+		logger.info("hostPort= " + servers.getHostPort());
+		if (servers.getHostName() != null){
+			if (servers.getHostPort() == null){
+				servers.setHostPort(80);
+				seversService.setServers(servers);
+			}
+		}
+		return "addServer";
+	}	
 	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
-	public String hostsInfoList (ModelMap model, @ModelAttribute("servers") Servers servers, HttpServletRequest request,HttpServletResponse response) throws Exception {
+	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		Calendar calendar = new GregorianCalendar();
 		int hour = calendar.get(Calendar.HOUR);
@@ -61,15 +68,7 @@ public class ServersController {
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		
 		response.setHeader("Refresh", "30");
-		
-		logger.info("hostName= " + servers.getHostName());
-		logger.info("hostPort= " + servers.getHostPort());
-		
-		if (servers.getHostName() != null && servers.getHostPort() != null){
-			listHosts.put(servers.getHostName(),servers.getHostPort());
-			requestServers.listsServers(listHosts);
-		}	
-		model.addAttribute("hostNameList", servListService.getListServ());
+		model.addAttribute("hostNameList", seversService.getListServ());
 		    
 		return "hostsInfoList";
 	}
