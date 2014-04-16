@@ -9,7 +9,7 @@ import com.listwebserv.dao.ServersDAO;
 import com.listwebserv.domain.Servers;
 import com.listwebserv.logic.HTTPConnService;
 @Service
-public class ServersServiceImpl implements SeversService{
+public class ServersServiceImpl implements ServersService{
 
 	@Autowired
 	private ServersDAO listServDAO;

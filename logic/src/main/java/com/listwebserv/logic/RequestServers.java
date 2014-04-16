@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.listwebserv.service.SeversService;
+import com.listwebserv.service.ServersService;
 
 @Component
 public class RequestServers  {
@@ -20,7 +20,7 @@ public class RequestServers  {
 	private HTTPConnService httpConnService;
 	
 	@Autowired
-	private SeversService seversService;
+	private ServersService seversService;
 	
 	private String hostName;
 	private Integer hostPort;

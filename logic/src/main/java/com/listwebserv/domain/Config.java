@@ -1,9 +1,12 @@
 package com.listwebserv.domain;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author fgm
  *
  */
+@Component
 public class Config {
 	
 	/**
@@ -44,7 +47,7 @@ public class Config {
 
 
 	public void setTimeRequest(int timeRequest) {
-		this.timeRequest = timeRequest;
+		this.timeRequest = timeRequest * 1000;
 	}
 
 
@@ -54,27 +57,27 @@ public class Config {
 
 
 	public void setTimeOutWaiting(int timeOutWaiting) {
-		this.timeOutWaiting = timeOutWaiting;
+		this.timeOutWaiting = timeOutWaiting * 1000;
 	}
 
 
-	public int getIntUpdate() {
+	public int getTimeUpdate() {
 		return timeUpdate;
 	}
 
 
-	public void setIntUpdate(int intUpdate) {
-		this.timeUpdate = intUpdate;
+	public void setTimeUpdate(int timeUpdate) {
+		this.timeUpdate = timeUpdate * 1000;
 	}
 
 
-	public String getAddersSMTP() {
+	public String getAddressSMTP() {
 		return addressSMTP;
 	}
 
 
-	public void setAddersSMTP(String addersSMTP) {
-		this.addressSMTP = addersSMTP;
+	public void setAddressSMTP(String addressSMTP) {
+		this.addressSMTP = addressSMTP;
 	}
 
 

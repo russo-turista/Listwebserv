@@ -1,6 +1,5 @@
 package com.listwebserv.controllers;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 import com.listwebserv.domain.Servers;
-import com.listwebserv.service.SeversService;
+import com.listwebserv.service.ServersService;
 
 
 @Controller
@@ -32,7 +31,7 @@ public class ServersController {
 	private Servers servers;
 	
 	@Autowired 
-	private SeversService seversService;
+	private ServersService seversService;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
