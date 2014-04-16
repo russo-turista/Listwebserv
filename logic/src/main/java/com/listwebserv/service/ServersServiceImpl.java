@@ -1,8 +1,27 @@
 package com.listwebserv.service;
 
-import com.listwebserv.domain.Servers;
+import java.util.List;
 
-public class ServersServiceImpl implements SeversService{
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.listwebserv.dao.ServersDAO;
+import com.listwebserv.domain.Servers;
+import com.listwebserv.logic.HTTPConnService;
+@Service
+public class ServersServiceImpl implements ServersService{
+
+	@Autowired
+	private ServersDAO listServDAO;
+	
+	@Autowired
+	SettingsService settingsService;
+	@Autowired
+	private HTTPConnService httpConnService;
+
+	public List<Servers> getListServ(){
+		return listServDAO.getListServDB();
+	}
 
 	@Override
 	public Servers getServers(String hostName) {
@@ -11,9 +30,8 @@ public class ServersServiceImpl implements SeversService{
 	}
 
 	@Override
-	public void setServers(Servers servers) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setServers(Servers server) {
+		listServDAO.setServerDB(httpConnService.httpUrlServers(server, settingsService.getConfig().getTimeOutWaiting()));		
+	};
 
 }
