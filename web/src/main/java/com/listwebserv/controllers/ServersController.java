@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
 import com.listwebserv.domain.Servers;
 import com.listwebserv.service.ServersService;
+import com.listwebserv.service.SettingsService;
 
 
 @Controller
@@ -32,6 +34,9 @@ public class ServersController {
 	
 	@Autowired 
 	private ServersService seversService;
+	
+	@Autowired
+	private SettingsService settingsService;
 	
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -66,7 +71,7 @@ public class ServersController {
 		
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
 		
-		response.setHeader("Refresh", "30");
+		response.setHeader("Refresh", String.valueOf(settingsService.getConfig().getTimeUpdate()));
 		model.addAttribute("hostNameList", seversService.getListServ());
 		    
 		return "hostsInfoList";

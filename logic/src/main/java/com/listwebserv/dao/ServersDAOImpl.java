@@ -18,7 +18,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.listwebserv.domain.Servers;
-import com.listwebserv.domain.User;
 import com.listwebserv.service.enums.ServersStatusEnum;
 
 /**
@@ -70,31 +69,33 @@ public class ServersDAOImpl implements ServersDAO {
 	public void setServerDB(Servers server) {
 		sql = "INSERT INTO server(HOSTNAME, HOSTPORT, LASTCHECK, CREATED, ACTIVE, STATE, RESPONSE, IPADDRESS) VALUES(?,?,?,?,?,?::state_type,?,?)";
         jdbcTemplate.update(sql, 
-	        					server.getHostName(), server.getHostPort(), 
-	        					new Timestamp(System.currentTimeMillis()), new Timestamp(System.currentTimeMillis()), 
-	        					server.getActive(), server.getState().name(), server.getResponse(), server.getIpAddress());
-        /*sql = "INSERT INTO server(HOSTNAME, HOSTPORT, LASTCHECK, CREATED, ACTIVE, STATE, RESPONSE, IPADDRESS) values "
-                + "(:hostName, :hostPort, :lastCheck, :created, :active, :state, :response, :ipAddress);";
-        
-        Map<String, Object> parameters = new HashMap<String, Object>();
-        
-        parameters.put("hostName", server.getHostName());
-        parameters.put("hostPort", server.getHostPort());
-        parameters.put("lastCheck", new Timestamp(System.currentTimeMillis()));
-        parameters.put("created", new Timestamp(System.currentTimeMillis()));
-        parameters.put("active", server.getActive());
-        parameters.put("state", server.getState().name());
-        parameters.put("response", server.getResponse());
-        parameters.put("ipAddress", server.getIpAddress());
-        jdbcTemplate.update(sql, parameters);
-        jdbcTemplate.up*/
-        
+        		server.getHostName(), server.getHostPort(),
+				new Timestamp(System.currentTimeMillis()),
+				new Timestamp(System.currentTimeMillis()), server.getActive(),
+				server.getState().name(), server.getResponse(),
+				server.getIpAddress());
 	}
 	
 	
 	public List<Servers> getListServDB() {
 		sql = "SELECT * from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
+	}
+
+
+	@Override
+	public void updateSeverDB(Servers server) {
+		sql = "UPDATE  server SET HOSTPORT = ?, LASTCHECK = ?, "
+				+ "CREATED = ?, ACTIVE = ?, STATE = ?, RESPONSE = ?, "
+				+ "IPADDRESS = ? WHERE HOSTNAME = ?";
+		
+		Object[] parameters = {
+				server.getHostName(), server.getHostPort(), 
+				new Timestamp(System.currentTimeMillis()), server.getCreated(), 
+				server.getActive(), server.getState().name(), 
+				server.getResponse(), server.getIpAddress()};
+
+	   jdbcTemplate.update(sql, parameters, server.getHostName());	
 	}
 
 	

@@ -67,7 +67,7 @@ public class Config {
 
 
 	public void setTimeUpdate(int timeUpdate) {
-		this.timeUpdate = timeUpdate * 1000;
+		this.timeUpdate = timeUpdate;
 	}
 
 

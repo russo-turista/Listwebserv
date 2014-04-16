@@ -15,6 +15,8 @@ public class ServersServiceImpl implements ServersService{
 	private ServersDAO listServDAO;
 	
 	@Autowired
+	SettingsService settingsService;
+	@Autowired
 	private HTTPConnService httpConnService;
 
 	public List<Servers> getListServ(){
@@ -29,7 +31,7 @@ public class ServersServiceImpl implements ServersService{
 
 	@Override
 	public void setServers(Servers server) {
-		listServDAO.setServerDB(httpConnService.httpUrlServers(server, 2000));		
+		listServDAO.setServerDB(httpConnService.httpUrlServers(server, settingsService.getConfig().getTimeOutWaiting()));		
 	};
 
 }
