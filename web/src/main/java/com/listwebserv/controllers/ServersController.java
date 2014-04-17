@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
 import com.listwebserv.domain.Servers;
+import com.listwebserv.logic.ServersThread;
 import com.listwebserv.service.ServersService;
 import com.listwebserv.service.SettingsService;
 
@@ -37,7 +39,7 @@ public class ServersController {
 	
 	@Autowired
 	private SettingsService settingsService;
-	
+
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
 	

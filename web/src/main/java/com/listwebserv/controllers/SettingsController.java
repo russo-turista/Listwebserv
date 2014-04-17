@@ -24,13 +24,13 @@ public class SettingsController {
 	@Autowired
 	private SettingsService settingsService;
 	
-	@RequestMapping(value = "/")
+	@RequestMapping(value = "")
 	public String addSettings(ModelMap model) {
 		model.addAttribute("config", settingsService.getConfig());
 		System.out.println("AddConfig!!!!!!!!!");
 		return "addSettings";
 	}
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String getSettings(ModelMap model, @ModelAttribute("config") Config config) {
 		settingsService.setConfig(config);
 		return "addSettings";

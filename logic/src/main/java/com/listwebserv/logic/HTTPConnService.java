@@ -22,7 +22,7 @@ public class HTTPConnService {
 			URL url = new URL(PROTOCOL, server.getHostName(), server.getHostPort(),"/");
 			InetAddress address = InetAddress.getByName(url.getHost());	
 			HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-			urlCon.setReadTimeout(timeOutWaiting);
+			urlCon.setReadTimeout(timeOutWaiting * 1000);
 			
 			int status = urlCon.getResponseCode();
 			

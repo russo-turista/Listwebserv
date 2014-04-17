@@ -47,7 +47,7 @@ public class Config {
 
 
 	public void setTimeRequest(int timeRequest) {
-		this.timeRequest = timeRequest * 1000;
+		this.timeRequest = timeRequest;
 	}
 
 
@@ -57,7 +57,7 @@ public class Config {
 
 
 	public void setTimeOutWaiting(int timeOutWaiting) {
-		this.timeOutWaiting = timeOutWaiting * 1000;
+		this.timeOutWaiting = timeOutWaiting;
 	}
 
 
