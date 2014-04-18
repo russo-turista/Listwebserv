@@ -14,6 +14,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.listwebserv.logic.RequestServers;
+
 public class AppInitializer implements WebApplicationInitializer  {
 
 	  @Override

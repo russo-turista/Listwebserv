@@ -8,18 +8,19 @@ import org.springframework.stereotype.Service;
 import com.listwebserv.dao.ServersDAO;
 import com.listwebserv.domain.Servers;
 import com.listwebserv.logic.HTTPConnService;
+
 @Service
-public class ServersServiceImpl implements ServersService{
+public class ServersServiceImpl implements ServersService {
 
 	@Autowired
 	private ServersDAO listServDAO;
-	
+
 	@Autowired
 	SettingsService settingsService;
 	@Autowired
 	private HTTPConnService httpConnService;
 
-	public List<Servers> getListServ(){
+	public List<Servers> getListServ() {
 		return listServDAO.getListServDB();
 	}
 
@@ -31,7 +32,15 @@ public class ServersServiceImpl implements ServersService{
 
 	@Override
 	public void setServers(Servers server) {
-		listServDAO.setServerDB(httpConnService.httpUrlServers(server, settingsService.getConfig().getTimeOutWaiting()));		
+		if (server.getCreated() != null) {
+			System.out.println("Add new Servers");
+			listServDAO.setServerDB(httpConnService.httpUrlServers(server,
+					settingsService.getConfig().getTimeOutWaiting()));
+		} else {
+			System.out.println("Update Servers");
+			listServDAO.updateSeverDB(httpConnService.httpUrlServers(server,
+					settingsService.getConfig().getTimeOutWaiting()));
+		}
 	};
 
 }

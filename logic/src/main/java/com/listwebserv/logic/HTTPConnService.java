@@ -15,7 +15,7 @@ public class HTTPConnService {
 	//private Logger logger = Logger.getLogger(HTTPConnService.class);
 	
 	
-	public Servers httpUrlServers(Servers server, Integer timeOutWaiting )  {
+	public Servers httpUrlServers(Servers server, int timeOutWaiting )  {
 		
 		
 		try{			
@@ -42,8 +42,6 @@ public class HTTPConnService {
 				server.setState(ServersStatusEnum.FAIL);
 			}
 			
-			//hostInfo.put("address", address.getHostAddress().toString());
-			//hostInfo.put("response", urlCon.getResponseMessage());	
 			server.setIpAddress(address.getHostAddress().toString());
 			server.setResponse(urlCon.getResponseMessage());
 			

@@ -1,5 +1,6 @@
 package com.listwebserv.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-import com.listwebserv.logic.ServersThread;
+import com.listwebserv.logic.RequestServers;
+import com.listwebserv.logic.ScheduledRequestServers;
 import com.listwebserv.service.UserDetailsServiceImpl;
 
 @Configuration
@@ -33,10 +35,6 @@ class WebMvcConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new LocaleChangeInterceptor());
 	}
 	
-	// Указываем Spring контейнеру, что надо инициализировать <b></b>ShaPasswordEncoder
-    // Это можно вынести в WebAppConfig, но для понимаемости оставил тут
-    
-    
     @Bean
     public UserDetailsService getUserDetailsService(){
         return new UserDetailsServiceImpl();
@@ -46,6 +44,4 @@ class WebMvcConfig extends WebMvcConfigurerAdapter {
     public ShaPasswordEncoder passwordEncoder(){
         return new ShaPasswordEncoder(256);
     }
-    
-   
 }

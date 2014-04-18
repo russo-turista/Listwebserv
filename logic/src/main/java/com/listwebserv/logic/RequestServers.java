@@ -1,43 +1,27 @@
 package com.listwebserv.logic;
 
-//import LiftOff;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.listwebserv.service.ServersService;
+import com.listwebserv.domain.Servers;
+import com.listwebserv.service.SettingsService;
 
 @Component
 public class RequestServers  {
-	@Autowired
-	private HTTPConnService httpConnService;
 	
 	@Autowired
-	private ServersService seversService;
+	private SettingsService settingsService;
 	
-	private String hostName;
-	private Integer hostPort;
-	public Map<String, String> listHostsFull = new HashMap<String, String>();
-
-	/*public Map<String, String> getAddressIP(){
-		return addressIP;
+	@Autowired
+	private ScheduledRequestServers scheduledRequest;
+	@Autowired
+	private Servers servers;
+	
+	/*private RequestServers(){
+		startRequest();
 	}*/
-
-	public Map<String, String> listsServers(Map<String, Integer> listHosts) throws Exception{
-		for (Entry<String, Integer> entry : listHosts.entrySet()) {
-			hostName = entry.getKey();
-			hostPort = entry.getValue();
-			//seversService.addServerName(entry.getKey(), httpConnService.httpUrlServers(hostName, hostPort));
-		//	seversService.setServers(servers);
-		}
-		return listHostsFull;
-				
+	public void startRequest(){
+		scheduledRequest.scheduledStart(settingsService.getConfig().getTimeRequest());
 	}
 }
+

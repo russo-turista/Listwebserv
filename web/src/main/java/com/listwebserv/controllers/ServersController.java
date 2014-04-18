@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
 import com.listwebserv.domain.Servers;
-import com.listwebserv.logic.ServersThread;
+import com.listwebserv.logic.RequestServers;
+import com.listwebserv.logic.ScheduledRequestServers;
 import com.listwebserv.service.ServersService;
 import com.listwebserv.service.SettingsService;
 
@@ -39,6 +41,8 @@ public class ServersController {
 	
 	@Autowired
 	private SettingsService settingsService;
+	@Autowired
+	private RequestServers requestServers;
 
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
@@ -66,6 +70,7 @@ public class ServersController {
 	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
 	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
+		//requestServers.startRequest();
 		Calendar calendar = new GregorianCalendar();
 		int hour = calendar.get(Calendar.HOUR);
 		int minute = calendar.get(Calendar.MINUTE);
