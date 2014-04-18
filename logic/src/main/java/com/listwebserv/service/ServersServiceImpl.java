@@ -32,7 +32,7 @@ public class ServersServiceImpl implements ServersService {
 
 	@Override
 	public void setServers(Servers server) {
-		if (server.getCreated() != null) {
+		if (server.getCreated() == null) {
 			System.out.println("Add new Servers");
 			listServDAO.setServerDB(httpConnService.httpUrlServers(server,
 					settingsService.getConfig().getTimeOutWaiting()));

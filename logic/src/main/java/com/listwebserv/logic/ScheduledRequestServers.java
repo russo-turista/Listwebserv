@@ -35,7 +35,7 @@ class ServersRunnable implements Runnable{
 	public void run() {
 		System.out.println("Run thread " + i);
 		try{
-			addDataServises.requestService();
+			//addDataServises.requestService();
 		}catch(Exception e){
 			System.out.println("Execption: " + e);
 		}

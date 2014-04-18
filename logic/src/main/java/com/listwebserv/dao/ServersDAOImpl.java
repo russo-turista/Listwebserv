@@ -86,16 +86,16 @@ public class ServersDAOImpl implements ServersDAO {
 	@Override
 	public void updateSeverDB(Servers server) {
 		sql = "UPDATE  server SET HOSTPORT = ?, LASTCHECK = ?, "
-				+ "CREATED = ?, ACTIVE = ?, STATE = ?, RESPONSE = ?, "
+				+ "CREATED = ?, ACTIVE = ?, STATE = ?::state_type, RESPONSE = ?, "
 				+ "IPADDRESS = ? WHERE HOSTNAME = ?";
 		
 		Object[] parameters = {
-				server.getHostName(), server.getHostPort(), 
+				server.getHostPort(), 
 				new Timestamp(System.currentTimeMillis()), server.getCreated(), 
 				server.getActive(), server.getState().name(), 
-				server.getResponse(), server.getIpAddress()};
+				server.getResponse(), server.getIpAddress(), server.getHostName()};
 
-	   jdbcTemplate.update(sql, parameters, server.getHostName());	
+	   jdbcTemplate.update(sql, parameters);	
 	}
 
 	

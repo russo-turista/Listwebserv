@@ -11,7 +11,8 @@ public class RequestServers  {
 	
 	@Autowired
 	private SettingsService settingsService;
-	
+	@Autowired
+	AddDataServises addDataServises;
 	@Autowired
 	private ScheduledRequestServers scheduledRequest;
 	@Autowired
@@ -21,6 +22,7 @@ public class RequestServers  {
 		startRequest();
 	}*/
 	public void startRequest(){
+		addDataServises.requestService();
 		scheduledRequest.scheduledStart(settingsService.getConfig().getTimeRequest());
 	}
 }
