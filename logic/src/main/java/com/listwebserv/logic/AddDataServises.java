@@ -2,13 +2,13 @@ package com.listwebserv.logic;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.listwebserv.domain.Servers;
 import com.listwebserv.service.ServersService;
 import com.listwebserv.service.SettingsService;
 
-@Component
+@Service
 public class AddDataServises {
 	@Autowired
 	private HTTPConnService httpConnService;
@@ -25,5 +25,8 @@ public class AddDataServises {
 			seversService.setServers(httpConnService.httpUrlServers(severs,
 					settingsService.getConfig().getTimeOutWaiting()));
 		}
+	}
+	public String name() {
+		return "Check";
 	}
 }
