@@ -22,7 +22,7 @@ public class JdbcConfig {
         try {
             dataSource = (DataSource) jndi.lookup("java:comp/env/jdbc/ServListDB");
         } catch (NamingException e) {
-            logger.error("NamingException for java:comp/env/jdbc/yourname", e);
+            logger.error("NamingException for java:comp/env/jdbc/ServListDB", e);
         }
         return dataSource;
     }

@@ -24,7 +24,7 @@ public class AppInitializer implements WebApplicationInitializer  {
    
     	AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
     	ctx.setDisplayName("WebListServ");
-    	ctx.register(WebMvcConfig.class, JdbcConfig.class, SecurityConfig.class);
+    	ctx.register(WebMvcConfig.class, JdbcConfig.class, SecurityConfig.class, SpringScheduled.class);
   // Листенер для управления жизненным циклом корневого контекста Spring  
         servletContext.addListener(new ContextLoaderListener(ctx));
         

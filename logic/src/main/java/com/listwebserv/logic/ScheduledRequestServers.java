@@ -3,10 +3,10 @@ package com.listwebserv.logic;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 
 import static java.util.concurrent.TimeUnit.*;
@@ -18,7 +18,7 @@ public class ScheduledRequestServers {
 			.newSingleThreadScheduledExecutor();
 
 	public void scheduledStart(int timeRequest) {
-		scheduler.scheduleWithFixedDelay(new ServersRunnable(addDataServises), 0,
+		scheduler.scheduleWithFixedDelay(new ServersRunnable(), 0,
 				timeRequest, SECONDS);
 	}
 	public void scheduledStop(){
@@ -29,25 +29,23 @@ public class ScheduledRequestServers {
 @Component
 class ServersRunnable implements Runnable{
 	
-	//private static final Logger logger = Logger.getLogger(ServersRunnable.class);
+	private static final Logger logger = Logger.getLogger(ServersRunnable.class);
 	@Autowired
 	private AddDataServises addDataServises;
 	private int i = 0;
-	ServersRunnable(){
-		
-	}
+	ServersRunnable(){}
 	ServersRunnable(AddDataServises addDataServises){
 		this.addDataServises = addDataServises;
 	}
 	@Override
 	public void run() {
-		System.out.println("Run thread " + i);
+		//System.out.println("Run thread " + i);
+		logger.info("Start Load thread[" + i + "]");
 		try{
 			addDataServises.requestService();
-			//System.out.println("Check= " + addDataServises.name());
 		}catch(Exception e){
-			System.out.println("Execption: " + e);
+			logger.error("Execption Runnable: " + e);
 		}
-		System.out.println("Stop thread" + i++);
+		logger.info("Executed thread[" + i++ + "]");
 	}
 }

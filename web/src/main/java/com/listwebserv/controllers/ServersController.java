@@ -70,7 +70,6 @@ public class ServersController {
 	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
 	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
-		//requestServers.startRequest();
 		Calendar calendar = new GregorianCalendar();
 		int hour = calendar.get(Calendar.HOUR);
 		int minute = calendar.get(Calendar.MINUTE);

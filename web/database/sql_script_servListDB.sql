@@ -44,7 +44,8 @@ CREATE TABLE config(
 		timeOutWaiting 					INTEGER,
 		timeUpdate 						INTEGER,
 		addressSMTP 					VARCHAR(128),
-		portSMTP 						INTEGER DEFAULT 25
+		portSMTP 						INTEGER DEFAULT 25,
+		activeRuquest                   BOOLEAN DEFAULT true
 );
 INSERT INTO users (NAME, LOGIN, PASSWORD, EMAIL, CREATED, LASTLOGIN, ACTIVE, ADMIN)
     VALUES ('admin', 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'admin@mail.ru', '1994-11-29', '2014-03-20', true, true);
@@ -57,3 +58,4 @@ INSERT INTO server (HOSTNAME, RESPONSEHOST, LASTCHECK, CREATED, ACTIVE, STATE, I
  INSERT INTO employeeLists (ID_EMPLOYEE, ID_SERVER)
  	VALUES (2,2);
 DELETE FROM server WHERE ID_SERVER = 1;
+ALTER TABLE config ADD COLUMN activeRuquest boolean Default true;

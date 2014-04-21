@@ -15,9 +15,9 @@
  <table> 
   <table> 
   <tr>   
-   <td> Интервал опроса серверов:  <@spring.formInput "config.timeRequest"/> <br/> </td>    
+   <td> Интервал опроса серверов:  <@spring.formInput "config.timeRequest"/> <br/> </td>   
+    <td> Вкл./Выкл. опрос серверов:  <@spring.formCheckbox "config.activeRuquest" "true"/> <br/> </td>  
   </tr>
-   
   <tr>
    <td> Таймаут ожидания ответа сервера: <@spring.formInput "config.timeOutWaiting" /> <br/>  </td>
   </tr> 

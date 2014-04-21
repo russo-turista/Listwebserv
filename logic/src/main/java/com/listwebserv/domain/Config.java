@@ -40,6 +40,21 @@ public class Config {
 	 */
 	private int portSMTP;
 
+	/**
+	 * 
+	 * Влючен или выключен опрос серверов
+	 */
+	private boolean activeRuquest;
+	
+	public boolean getActiveRuquest() {
+		return activeRuquest;
+	}
+
+
+	public void setActiveRuquest(boolean activeRuquest) {
+		this.activeRuquest = activeRuquest;
+	}
+
 
 	public int getTimeRequest() {
 		return timeRequest;

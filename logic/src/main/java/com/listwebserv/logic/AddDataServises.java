@@ -17,16 +17,12 @@ public class AddDataServises {
 	@Autowired
 	private SettingsService settingsService;
 	
-	//private static final Logger logger = Logger.getLogger(AddDataServises.class);
+	private static final Logger logger = Logger.getLogger(AddDataServises.class);
 	public void requestService() {
 		for (Servers severs : seversService.getListServ()) {
-			//logger.info("currnet server= " + severs.getHostName());
-			System.out.println("currnet server= " + severs.getHostName());
+			logger.info("currnet server= " + severs.getHostName());
 			seversService.setServers(httpConnService.httpUrlServers(severs,
 					settingsService.getConfig().getTimeOutWaiting()));
 		}
-	}
-	public String name() {
-		return "Check";
 	}
 }
