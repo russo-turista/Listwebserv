@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.listwebserv.domain.Servers;
 import com.listwebserv.domain.User;
+import com.listwebserv.service.ServersService;
 import com.listwebserv.service.UserService;
 
 @Controller
@@ -18,9 +20,12 @@ public class UsersController {
 	
 	@Autowired
 	private User user;
-	
+	@Autowired
+	private Servers servers;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ServersService seversService;
 	
 	@RequestMapping(value = "/addUser")
 	public String setUser(ModelMap model) {
@@ -37,5 +42,12 @@ public class UsersController {
 		System.out.println("user active: " + user.getActive());
 		userService.setUser(user);
 		return "addUser";
+	}
+	
+	@RequestMapping(value = "/addServerToUser")
+	public String setListServersAndUsers(ModelMap model){
+		model.addAttribute("listServers", seversService.getListServ());
+		model.addAttribute("servers", servers);
+		return "addServerToUser";
 	}
 }

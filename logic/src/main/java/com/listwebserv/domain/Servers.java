@@ -1,6 +1,7 @@
 package com.listwebserv.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -62,9 +63,30 @@ public class Servers {
      * IP-адрес или имя хоста.
      */
     private String ipAddress;
+    /**
+     * 
+     * Флаг определяет выделен ли сервер в списке пользователя
+     */
+    private Boolean isSelected;
     
+    /**
+     * список серверов, для ввывода в web странице 
+     */
+    private List<Servers> listServers;
     
-    public Long getIdServer() {
+    public List<Servers> getListServers() {
+		return listServers;
+	}
+	public void setListServers(List<Servers> listServers) {
+		this.listServers = listServers;
+	}
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
+	}
+	public Long getIdServer() {
 		return idServer;
 	}
 	public void setIdServer(Long idServer) {
