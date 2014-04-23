@@ -98,5 +98,19 @@ public class ServersDAOImpl implements ServersDAO {
 	   jdbcTemplate.update(sql, parameters);	
 	}
 
+
+	@Override
+	public Map<String, Object> getmapIdServersDB() {
+		sql = "SELECT idServer, hostName from server";
+		return jdbcTemplate.queryForMap(sql);
+	}
+
+
+	@Override
+	public void setmapIdServersDB(Map<Integer, String> mapServers) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

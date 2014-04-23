@@ -72,12 +72,12 @@ public class Servers {
     /**
      * список серверов, для ввывода в web странице 
      */
-    private List<Servers> listServers;
+    private List<String> listServers;
     
-    public List<Servers> getListServers() {
+    public List<String> getListServers() {
 		return listServers;
 	}
-	public void setListServers(List<Servers> listServers) {
+	public void setListServers(List<String> listServers) {
 		this.listServers = listServers;
 	}
 	public Boolean getIsSelected() {

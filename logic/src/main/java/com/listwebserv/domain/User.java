@@ -1,6 +1,7 @@
 package com.listwebserv.domain;
 
 import java.security.Timestamp;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -60,6 +61,21 @@ public class User {
 	 */
 	private Boolean admin;
 	
+	/**
+	 * Список пользователей
+	 * 
+	 */
+	private List<User> listUsers;
+	public List<User> getListUsers() {
+		return listUsers;
+	}
+
+
+	public void setListUsers(List<User> listUsers) {
+		this.listUsers = listUsers;
+	}
+
+
 	public Long getUserId() {
 		return userId;
 	}

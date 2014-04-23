@@ -1,6 +1,8 @@
 package com.listwebserv.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +21,7 @@ public class ServersServiceImpl implements ServersService {
 	SettingsService settingsService;
 	@Autowired
 	private HTTPConnService httpConnService;
-
+	private Map<String, String > mapIdServers= new HashMap<String, String>();
 	public List<Servers> getListServ() {
 		return listServDAO.getListServDB();
 	}
@@ -41,6 +43,19 @@ public class ServersServiceImpl implements ServersService {
 			listServDAO.updateSeverDB(httpConnService.httpUrlServers(server,
 					settingsService.getConfig().getTimeOutWaiting()));
 		}
+	}
+
+	@Override
+	public Map<String, String > getMapIdServers() {
+		for (Servers listItem : listServDAO.getListServDB()){
+			mapIdServers.put(listItem.getIdServer().toString(), listItem.getHostName());
+		}
+		return mapIdServers;
+	}
+
+	@Override
+	public void setMapIdServers(Map<String, String> mapIdServers) {
+		//this.mapIdServers = mapIdServers;		
 	};
 
 }

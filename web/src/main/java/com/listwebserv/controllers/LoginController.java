@@ -16,7 +16,7 @@ public class LoginController {
 	RequestServers requestServers;
     @RequestMapping(method = RequestMethod.GET)
     public String loginPage(Model model){
-    	//requestServers.startRequest();
+    
         return "login";
     }
 }    

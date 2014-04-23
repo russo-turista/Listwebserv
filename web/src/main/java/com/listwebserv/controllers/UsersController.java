@@ -46,8 +46,18 @@ public class UsersController {
 	
 	@RequestMapping(value = "/addServerToUser")
 	public String setListServersAndUsers(ModelMap model){
-		model.addAttribute("listServers", seversService.getListServ());
+		System.out.println("GET addServerToUser");
+		model.addAttribute("listServers", seversService.getMapIdServers());
+		
 		model.addAttribute("servers", servers);
+		return "addServerToUser";
+	}
+	@RequestMapping(value = "/addServerToUser", method = RequestMethod.POST)
+	public String getListServersAndUsers(ModelMap model, @ModelAttribute("servers") Servers servers ){
+			System.out.println("Post addServerToUser");
+			for (String item : servers.getListServers()){
+				System.out.println("List servers: "  + item);	
+			}
 		return "addServerToUser";
 	}
 }

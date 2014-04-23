@@ -11,16 +11,12 @@
      
   <fieldset>
     <legend>Host Inf</legend>
-  <form action="addServersToUser" method="POST">
+  <form action="addServerToUser" method="POST">
   
   <table> 
   <tr>
    <td>
    <@spring.formCheckboxes "servers.listServers", listServers, '<br>'/>
-   <br/>
-   </td>
-   <td>
-    Add address:  <@spring.formInput "servers.hostName"/> <br/>
    </td>
   </tr> 
    </table>

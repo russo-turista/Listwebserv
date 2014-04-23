@@ -52,7 +52,7 @@ public class SpringScheduled implements SchedulingConfigurer {
 		taskRegistrar.addTriggerTask(new Runnable() {
 			@Override
 			public void run() {
-				logger.info("Ruquest servers is active:" + settingsService.getConfig().getActiveRuquest());
+				//logger.info("Ruquest servers is active:" + settingsService.getConfig().getActiveRuquest());
 				if (settingsService.getConfig().getActiveRuquest()) {
 					requestServers.startRequest();
 				}
@@ -68,8 +68,8 @@ public class SpringScheduled implements SchedulingConfigurer {
 						.getConfig().getTimeRequest()); // you can get the value
 														// from wherever you
 														// want
-				logger.info("TimeRequest in Trigger: "
-						+ settingsService.getConfig().getTimeRequest());
+				//logger.info("TimeRequest in Trigger: "
+				//		+ settingsService.getConfig().getTimeRequest());
 				return nextExecutionTime.getTime();
 			}
 		});
