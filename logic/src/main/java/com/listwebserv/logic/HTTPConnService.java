@@ -3,7 +3,7 @@ package com.listwebserv.logic;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.service.enums.ServersStatusEnum;
 
 import java.net.*;
@@ -15,7 +15,7 @@ public class HTTPConnService {
 	//private Logger logger = Logger.getLogger(HTTPConnService.class);
 	
 	
-	public Servers httpUrlServers(Servers server, int timeOutWaiting )  {
+	public Server httpUrlServers(Server server, int timeOutWaiting )  {
 		
 		
 		try{			

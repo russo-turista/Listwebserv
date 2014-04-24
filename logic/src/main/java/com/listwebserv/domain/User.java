@@ -65,13 +65,14 @@ public class User {
 	 * Список пользователей
 	 * 
 	 */
-	private List<User> listUsers;
-	public List<User> getListUsers() {
+	private List<String> listUsers;
+	
+	public List<String> getListUsers() {
 		return listUsers;
 	}
 
 
-	public void setListUsers(List<User> listUsers) {
+	public void setListUsers(List<String> listUsers) {
 		this.listUsers = listUsers;
 	}
 

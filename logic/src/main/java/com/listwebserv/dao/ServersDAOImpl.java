@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.service.enums.ServersStatusEnum;
 
 /**
@@ -29,7 +29,7 @@ public class ServersDAOImpl implements ServersDAO {
 
     
 	@Autowired 
-    private Servers servers;
+    private Server servers;
 
     
     private String sql = "";
@@ -48,10 +48,10 @@ public class ServersDAOImpl implements ServersDAO {
     @Resource
     private JdbcOperations jdbcTemplate;
   
-    private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
+    private RowMapper<Server> rowMapperServ = new RowMapper<Server>() {
 
-        public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	servers = new Servers();
+        public Server mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	servers = new Server();
         	servers.setIdServer(rs.getLong("idServer"));
         	servers.setHostName(rs.getString("hostName"));
         	servers.setHostPort(rs.getInt("hostPort"));
@@ -66,7 +66,7 @@ public class ServersDAOImpl implements ServersDAO {
         }
     };
 
-	public void setServerDB(Servers server) {
+	public void setServerDB(Server server) {
 		sql = "INSERT INTO server(HOSTNAME, HOSTPORT, LASTCHECK, CREATED, ACTIVE, STATE, RESPONSE, IPADDRESS) VALUES(?,?,?,?,?,?::state_type,?,?)";
         jdbcTemplate.update(sql, 
         		server.getHostName(), server.getHostPort(),
@@ -77,14 +77,14 @@ public class ServersDAOImpl implements ServersDAO {
 	}
 	
 	
-	public List<Servers> getListServDB() {
+	public List<Server> getListServDB() {
 		sql = "SELECT * from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 
 
 	@Override
-	public void updateSeverDB(Servers server) {
+	public void updateSeverDB(Server server) {
 		sql = "UPDATE  server SET HOSTPORT = ?, LASTCHECK = ?, "
 				+ "CREATED = ?, ACTIVE = ?, STATE = ?::state_type, RESPONSE = ?, "
 				+ "IPADDRESS = ? WHERE HOSTNAME = ?";

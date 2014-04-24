@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.domain.User;
 
 
@@ -15,7 +15,7 @@ public interface UsersDAO {
 	
 	public User getUserDB(String login);
 	
-	
+	public List<User> getListUserDB(); 
 	
 	
 }    

@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.listwebserv.dao.ServersDAO;
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.logic.HTTPConnService;
 
 @Service
@@ -22,18 +22,18 @@ public class ServersServiceImpl implements ServersService {
 	@Autowired
 	private HTTPConnService httpConnService;
 	private Map<String, String > mapIdServers= new HashMap<String, String>();
-	public List<Servers> getListServ() {
+	public List<Server> getListServ() {
 		return listServDAO.getListServDB();
 	}
 
 	@Override
-	public Servers getServers(String hostName) {
+	public Server getServers(String hostName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setServers(Servers server) {
+	public void setServers(Server server) {
 		if (server.getCreated() == null) {
 			System.out.println("Add new Servers");
 			listServDAO.setServerDB(httpConnService.httpUrlServers(server,
@@ -47,7 +47,7 @@ public class ServersServiceImpl implements ServersService {
 
 	@Override
 	public Map<String, String > getMapIdServers() {
-		for (Servers listItem : listServDAO.getListServDB()){
+		for (Server listItem : listServDAO.getListServDB()){
 			mapIdServers.put(listItem.getIdServer().toString(), listItem.getHostName());
 		}
 		return mapIdServers;

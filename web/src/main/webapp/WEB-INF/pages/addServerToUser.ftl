@@ -16,7 +16,10 @@
   <table> 
   <tr>
    <td>
-   <@spring.formCheckboxes "servers.listServers", listServers, '<br>'/>
+   <@spring.formCheckboxes "server.listServers", listServers, '<br>'/>
+   </td>
+   <td>
+   <@spring.formCheckboxes "user.listUsers", listUsers, '<br>'/>
    </td>
   </tr> 
    </table>

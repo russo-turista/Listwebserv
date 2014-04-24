@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.domain.User;
 import com.listwebserv.service.ServersService;
 import com.listwebserv.service.UserService;
@@ -21,7 +21,7 @@ public class UsersController {
 	@Autowired
 	private User user;
 	@Autowired
-	private Servers servers;
+	private Server servers;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -41,6 +41,7 @@ public class UsersController {
 		System.out.println("user password: " + user.getPassword());
 		System.out.println("user active: " + user.getActive());
 		userService.setUser(user);
+		System.out.println("addUser POST");
 		return "addUser";
 	}
 	
@@ -48,16 +49,26 @@ public class UsersController {
 	public String setListServersAndUsers(ModelMap model){
 		System.out.println("GET addServerToUser");
 		model.addAttribute("listServers", seversService.getMapIdServers());
+		model.addAttribute("server", servers);
 		
-		model.addAttribute("servers", servers);
+		model.addAttribute("listUsers", userService.getMapIdUsers());
+		model.addAttribute("user", user);
 		return "addServerToUser";
 	}
 	@RequestMapping(value = "/addServerToUser", method = RequestMethod.POST)
-	public String getListServersAndUsers(ModelMap model, @ModelAttribute("servers") Servers servers ){
+	public String getListServersAndUsers(ModelMap model, @ModelAttribute("servers") Server servers, @ModelAttribute("user") User user ){
 			System.out.println("Post addServerToUser");
 			for (String item : servers.getListServers()){
-				System.out.println("List servers: "  + item);	
+				System.out.println("List server: "  + item);	
 			}
+			for (String item : user.getListUsers()){
+				System.out.println("List user: "  + item);	
+			}
+			model.addAttribute("listServers", seversService.getMapIdServers());
+			model.addAttribute("server", servers);
+			
+			model.addAttribute("listUsers", userService.getMapIdUsers());
+			model.addAttribute("user", user);
 		return "addServerToUser";
 	}
 }
