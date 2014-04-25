@@ -16,17 +16,17 @@
   <table> 
   <tr>
    <td>
-    Add address:  <@spring.formInput "servers.hostName"/> <br/>
+    Add address:  <@spring.formInput "server.hostName"/> <br/>
    </td>
   </tr> 
   <tr>
    <td>
-    Add port: <@spring.formInput "servers.hostPort" /> <br/>
+    Add port: <@spring.formInput "server.hostPort" /> <br/>
    </td>
   </tr>
 	<tr>
 	<td>
-  	 Add is active: <@spring.formCheckbox "servers.active" "true"/> 
+  	 Add is active: <@spring.formCheckbox "server.active" "true"/> 
   	</td>
   </tr> 
    </table>

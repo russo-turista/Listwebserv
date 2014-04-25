@@ -12,7 +12,7 @@ import com.listwebserv.service.enums.ServersStatusEnum;
  *
  */
 @Component
-public class Servers {
+public class Server {
 	
 	/**
 	 * Уникальный идентификатор сущности в системе.

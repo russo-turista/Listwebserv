@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.logic.RequestServers;
 import com.listwebserv.logic.ScheduledRequestServers;
 import com.listwebserv.service.ServersService;
@@ -34,7 +34,7 @@ public class ServersController {
 	private final Logger logger = Logger.getLogger(ServersController.class);
 	
 	@Autowired 
-	private Servers servers;
+	private Server server;
 	
 	@Autowired 
 	private ServersService seversService;
@@ -49,20 +49,20 @@ public class ServersController {
 	
 	@RequestMapping(value = "/addServer")
 	public String addServer(ModelMap model) {
-		model.addAttribute("servers", servers);
+		model.addAttribute("server", server);
 		
 		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
 		return "addServer";
 	}	
 	
 	@RequestMapping(value = "/addServer", method = RequestMethod.POST)
-	public String saveServer(ModelMap model, @ModelAttribute("servers") Servers servers, HttpServletRequest request,HttpServletResponse response) {
-		logger.info("hostName= " + servers.getHostName());
-		logger.info("hostPort= " + servers.getHostPort());
-		if (servers.getHostName() != null){
-			if (servers.getHostPort() == null){
-				servers.setHostPort(80);
-				seversService.setServers(servers);
+	public String saveServer(ModelMap model, @ModelAttribute("server") Server server, HttpServletRequest request,HttpServletResponse response) {
+		logger.info("hostName= " + server.getHostName());
+		logger.info("hostPort= " + server.getHostPort());
+		if (server.getHostName() != null){
+			if (server.getHostPort() == null){
+				server.setHostPort(80);
+				seversService.setServers(server);
 			}
 		}
 		return "addServer";

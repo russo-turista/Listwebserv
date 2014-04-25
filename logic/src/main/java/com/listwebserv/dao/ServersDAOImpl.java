@@ -17,7 +17,8 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
+import com.listwebserv.domain.User;
 import com.listwebserv.service.enums.ServersStatusEnum;
 
 /**
@@ -29,7 +30,9 @@ public class ServersDAOImpl implements ServersDAO {
 
     
 	@Autowired 
-    private Servers servers;
+    private Server server;
+	@Autowired
+	private User user;
 
     
     private String sql = "";
@@ -48,25 +51,25 @@ public class ServersDAOImpl implements ServersDAO {
     @Resource
     private JdbcOperations jdbcTemplate;
   
-    private RowMapper<Servers> rowMapperServ = new RowMapper<Servers>() {
+    private RowMapper<Server> rowMapperServ = new RowMapper<Server>() {
 
-        public Servers mapRow(ResultSet rs, int rowNum) throws SQLException {
-        	servers = new Servers();
-        	servers.setIdServer(rs.getLong("idServer"));
-        	servers.setHostName(rs.getString("hostName"));
-        	servers.setHostPort(rs.getInt("hostPort"));
-        	servers.setUrlPath(rs.getString("urlPath"));
-        	servers.setLastCheck(rs.getTimestamp("lastCheck"));
-        	servers.setCreated(rs.getTimestamp("created"));
-        	servers.setActive(rs.getBoolean("active"));
-        	servers.setState(ServersStatusEnum.valueOf(rs.getString("state")));
-        	servers.setResponse(rs.getString("response"));
-        	servers.setIpAddress(rs.getString("ipAddress"));
-            return servers;
+        public Server mapRow(ResultSet rs, int rowNum) throws SQLException {
+        	server = new Server();
+        	server.setIdServer(rs.getLong("idServer"));
+        	server.setHostName(rs.getString("hostName"));
+        	server.setHostPort(rs.getInt("hostPort"));
+        	server.setUrlPath(rs.getString("urlPath"));
+        	server.setLastCheck(rs.getTimestamp("lastCheck"));
+        	server.setCreated(rs.getTimestamp("created"));
+        	server.setActive(rs.getBoolean("active"));
+        	server.setState(ServersStatusEnum.valueOf(rs.getString("state")));
+        	server.setResponse(rs.getString("response"));
+        	server.setIpAddress(rs.getString("ipAddress"));
+            return server;
         }
     };
 
-	public void setServerDB(Servers server) {
+	public void setServerDB(Server server) {
 		sql = "INSERT INTO server(HOSTNAME, HOSTPORT, LASTCHECK, CREATED, ACTIVE, STATE, RESPONSE, IPADDRESS) VALUES(?,?,?,?,?,?::state_type,?,?)";
         jdbcTemplate.update(sql, 
         		server.getHostName(), server.getHostPort(),
@@ -77,14 +80,14 @@ public class ServersDAOImpl implements ServersDAO {
 	}
 	
 	
-	public List<Servers> getListServDB() {
+	public List<Server> getListServDB() {
 		sql = "SELECT * from server";
 		return jdbcTemplate.query(sql, rowMapperServ);
 	}
 
 
 	@Override
-	public void updateSeverDB(Servers server) {
+	public void updateSeverDB(Server server) {
 		sql = "UPDATE  server SET HOSTPORT = ?, LASTCHECK = ?, "
 				+ "CREATED = ?, ACTIVE = ?, STATE = ?::state_type, RESPONSE = ?, "
 				+ "IPADDRESS = ? WHERE HOSTNAME = ?";
@@ -106,11 +109,30 @@ public class ServersDAOImpl implements ServersDAO {
 	}
 
 
+
 	@Override
-	public void setmapIdServersDB(Map<Integer, String> mapServers) {
+	public void setServerToUsersDB(Long idServer, Long idUser) {
+		sql = "INSERT INTO userlists(idServer, idUser) VALUES(?,?)";
+		jdbcTemplate.update(sql,idServer, idUser);
+	}
+
+
+	@Override
+	public void setMapIdServersDB(Map<Integer, String> mapServers) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public List<Server> getServersToUserDB(Long idUser) {
+		sql = "SELECT * FROM server WHERE server.idserver in"
+				+ "(SELECT userlists.idserver FROM userlists WHERE  idUser = ?) ORDER BY server.state desc";
+		
+		return jdbcTemplate.query(sql, rowMapperServ, idUser);
+	}
+
+
 
 	
 }

@@ -18,7 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import com.listwebserv.domain.Servers;
+import com.listwebserv.domain.Server;
 import com.listwebserv.domain.User;
 
 /**
@@ -51,11 +51,13 @@ public class UsersDAOImpl implements UsersDAO {
     private JdbcOperations jdbcTemplate;
 
     private RowMapper<User> rowMapperUser = new RowMapper<User>() {
-
+    	// принемает параметры с базы данных
         public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         	user = new User();
+        	user.setUserId(rs.getLong("iduser"));
         	user.setName(rs.getString("name"));
         	user.setLogin(rs.getString("login"));
+        	user.setEmail(rs.getString("email"));
         	user.setAdmin(rs.getBoolean("admin"));
         	user.setActive(rs.getBoolean("active"));
         	user.setPassword(rs.getString("password"));
@@ -73,8 +75,19 @@ public class UsersDAOImpl implements UsersDAO {
 	}
 
 	public User getUserDB(String login) {
-		sql = "SELECT * FROM users WHERE LOGIN = ?";
+		sql = "SELECT * FROM users WHERE login = ?";
 		return jdbcTemplate.queryForObject(sql, rowMapperUser, login);    
 	}
+	public User getUserDB(Long userID) {
+		sql = "SELECT * FROM users WHERE iduser = ?";
+		return jdbcTemplate.queryForObject(sql, rowMapperUser, userID);    
+	}
+
+	@Override
+	public List<User> getListUserDB() {
+		sql = "SELECT * from users";
+		return jdbcTemplate.query(sql, rowMapperUser);
+	}
+
 	
 }
