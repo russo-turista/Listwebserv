@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService  {
 
 	@Override
 	public List<User> getListUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return usersDAO.getListUserDB();
 	}
 
 	@Override
@@ -48,6 +47,12 @@ public class UserServiceImpl implements UserService  {
 	public void setMapIdUsers(Map<String, String> mapUsers) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User getUser(Long userID) {
+		
+		return usersDAO.getUserDB(userID);
 	}
 	
 }

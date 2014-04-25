@@ -1,5 +1,6 @@
 package com.listwebserv.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.listwebserv.dao.ServersDAO;
 import com.listwebserv.domain.Server;
+import com.listwebserv.domain.User;
 import com.listwebserv.logic.HTTPConnService;
 
 @Service
@@ -56,6 +58,27 @@ public class ServersServiceImpl implements ServersService {
 	@Override
 	public void setMapIdServers(Map<String, String> mapIdServers) {
 		//this.mapIdServers = mapIdServers;		
-	};
+	}
 
+	@Override
+	public void setServerToUsers(List<String> listServers, List<String> listUsers) {
+		for(String idServer : listServers){
+			for (String idUser : listUsers){
+				listServDAO.setServerToUsersDB(Long.valueOf(idServer), Long.valueOf(idUser));
+			}
+		}
+		
+	};
+	private List<Long> setStringToLong(List<String> listString){
+		List<Long> listLong = new ArrayList<Long>();
+		for(String item : listString){
+			listLong.add(Long.valueOf(item));
+		}
+		return listLong;
+	}
+
+	@Override
+	public List<Server> getServersToUser(Long idUser){ 
+		return listServDAO.getServersToUserDB(idUser);
+	}
 }

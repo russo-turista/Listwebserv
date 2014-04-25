@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.listwebserv.domain.Server;
+import com.listwebserv.domain.User;
 
 
 public interface ServersService {
@@ -12,4 +13,7 @@ public interface ServersService {
 	public List<Server> getListServ();
 	public Map<String, String> getMapIdServers();
 	public void setMapIdServers(Map<String, String> mapServers);
+	public void setServerToUsers(List<String> listServers, List<String> listUsers);
+	public List<Server> getServersToUser(Long idUser);
+	
 }

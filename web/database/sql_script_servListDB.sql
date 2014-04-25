@@ -37,6 +37,7 @@ CREATE TABLE users (
 CREATE TABLE userLists(
 	    idUser INTEGER REFERENCES users ON DELETE CASCADE,
 	    idServer INTEGER REFERENCES server ON DELETE CASCADE,
+	    UNIQUE(idUser, idServer),
 	    PRIMARY KEY (idUser, idServer)
 );
 CREATE TABLE config(

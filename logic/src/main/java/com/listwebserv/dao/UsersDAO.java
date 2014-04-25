@@ -14,8 +14,9 @@ public interface UsersDAO {
 	public void setUserDB(User user);
 	
 	public User getUserDB(String login);
-	
+	public User getUserDB(Long userID);
 	public List<User> getListUserDB(); 
+	
 	
 	
 }    
