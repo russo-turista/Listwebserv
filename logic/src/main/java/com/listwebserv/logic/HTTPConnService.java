@@ -27,7 +27,7 @@ public class HTTPConnService {
 			int status = urlCon.getResponseCode();
 			
 			if (status == HttpURLConnection.HTTP_OK){
-				logger.info("status= " + status);
+				//logger.info("status= " + status);
 				server.setState(ServersStatusEnum.OK);
 			}
 			if (status != HttpURLConnection.HTTP_OK && status < 500 ) {
@@ -36,7 +36,7 @@ public class HTTPConnService {
 				server.setState(ServersStatusEnum.WARN);
 			} 
 			if (status >= 500){
-				logger.info("status= " + status);
+				//logger.info("status= " + status);
 				//System.out.println("status= " + status);
 				server.setState(ServersStatusEnum.FAIL);
 			}

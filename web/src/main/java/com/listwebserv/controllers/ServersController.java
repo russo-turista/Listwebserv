@@ -67,7 +67,7 @@ public class ServersController {
 		}
 		return "addServer";
 	}	
-	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
+	@RequestMapping(value = "/hostsInfoList" , method = RequestMethod.GET)
 	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 		
 		Calendar calendar = new GregorianCalendar();

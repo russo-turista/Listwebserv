@@ -58,6 +58,9 @@ public class UsersController {
 			for (String item : servers.getListServers()){
 				System.out.println("List servers: "  + item);	
 			}
-		return "addServerToUser";
+			model.addAttribute("servers", servers);
+			model.addAttribute("listServers", seversService.getMapIdServers());
+			System.out.println("Post addServerToUser end");
+		return "hostsInfoList";
 	}
 }
