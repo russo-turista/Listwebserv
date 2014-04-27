@@ -30,15 +30,15 @@ import com.listwebserv.service.SettingsService;
 
 @Controller
 public class ServersController {
-	
+
 	private final Logger logger = Logger.getLogger(ServersController.class);
-	
+
 	@Autowired 
 	private Server server;
-	
+
 	@Autowired 
 	private ServersService seversService;
-	
+
 	@Autowired
 	private SettingsService settingsService;
 	@Autowired
@@ -46,15 +46,15 @@ public class ServersController {
 
 	private Map<String, Integer> listHosts = new HashMap<String, Integer>();
 
-	
+
 	@RequestMapping(value = "/addServer")
 	public String addServer(ModelMap model) {
 		model.addAttribute("server", server);
-		
+
 		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
 		return "addServer";
 	}	
-	
+
 	@RequestMapping(value = "/addServer", method = RequestMethod.POST)
 	public String saveServer(ModelMap model, @ModelAttribute("server") Server server, HttpServletRequest request,HttpServletResponse response) {
 		logger.info("hostName= " + server.getHostName());
@@ -67,23 +67,23 @@ public class ServersController {
 		}
 		return "addServer";
 	}	
-	@RequestMapping(value = "/hostsInfoList" , method = RequestMethod.GET)
+	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
 	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
-		
+
 		Calendar calendar = new GregorianCalendar();
 		int hour = calendar.get(Calendar.HOUR);
 		int minute = calendar.get(Calendar.MINUTE);
 		int second = calendar.get(Calendar.SECOND);
-		
+
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
-		
+
 		response.setHeader("Refresh", String.valueOf(settingsService.getConfig().getTimeUpdate()));
 		model.addAttribute("hostNameList", seversService.getListServ());
-		    
+
 		return "hostsInfoList";
 	}
-	
-	
-	
+
+
+
 
 }
