@@ -1,12 +1,4 @@
-<#include '/include/header.ftl'>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<html>
-<head><title>List Hosts name</title>
-<body>
-<div id="header">
-
-</div>
- 
+<#include '/include/header.ftl'> 
 
   <fieldset>
     <legend>Host Inf</legend>
@@ -40,7 +32,5 @@
   </form>
   </fieldset>
   <br/>
-  
-</div>  
-</body>
-</html>  
+ 
+<#include '/include/footer.ftl'>
