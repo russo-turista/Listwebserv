@@ -1,14 +1,15 @@
-				</div>	
- 			<!--end main context-->
-			</div>
-			<!--footer-->
-			<div class="row">
-				<div id="footer">
-      				<div class="container">
-       					<p class="text-muted">Create by Filippov</p>
-      				</div>
- 				</div>
-			</div>
-		</div>	   
-	 </body>
-</html>  
+	</div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-right">
+      <a class="navbar-brand"
+         title="Send mail"
+         href="mailto:fjobmail@gmai.com"
+         target="_blank">fjobmail@gmai.com</a>.
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>                                                             

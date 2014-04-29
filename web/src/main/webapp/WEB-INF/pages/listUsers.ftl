@@ -1,29 +1,17 @@
 <#include '/include/header.ftl'>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<html>
-<head><title>List Hosts name</title>
-<body>
-<div id="header">
-
-</div>
- 
-<div id="content">
-     
-  <fieldset>
-    <legend>List User</legend>
-    
+    <legend>Список пользователей</legend>  
   
-  <br/>
-  <table class="datatable">
-    <tr>
-    </tr>
-     <#list listUsers as listUsersValue>
-    <tr>
-         <td><a  href="<@spring.url '/user/${listUsersValue.userId}' />" >${listUsersValue.name}</a></td>  
-    </tr>
-    </#list>           
-  </table>
- </fieldset>
-</div>  
-</body>
-</html>  
+  <div class="container-fluid"> 
+    <div class="col-lg-3">
+      <table class="datatable">
+          <tr>
+          </tr>
+            <#list listUsers as listUsersValue>
+              <tr>
+                  <td><a  href="<@spring.url '/user/${listUsersValue.userId}' />" >${listUsersValue.name}</a></td>  
+              </tr>
+            </#list>           
+        </table>
+    </div>  
+  </div>  
+<#include '/include/footer.ftl'> 

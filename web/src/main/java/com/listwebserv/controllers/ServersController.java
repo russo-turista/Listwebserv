@@ -67,7 +67,7 @@ public class ServersController {
 		}
 		return "addServer";
 	}	
-	@RequestMapping(value = "/hostsInfoList" /*, method = RequestMethod.POST*/)
+	@RequestMapping(value = "/listServers" /*, method = RequestMethod.POST*/)
 	public String hostsInfoList (ModelMap model, HttpServletRequest request,HttpServletResponse response) throws Exception {
 
 		Calendar calendar = new GregorianCalendar();
@@ -80,7 +80,7 @@ public class ServersController {
 		response.setHeader("Refresh", String.valueOf(settingsService.getConfig().getTimeUpdate()));
 		model.addAttribute("hostNameList", seversService.getListServ());
 
-		return "hostsInfoList";
+		return "listServers";
 	}
 
 

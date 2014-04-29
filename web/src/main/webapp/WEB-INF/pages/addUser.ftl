@@ -1,15 +1,6 @@
 <#include '/include/header.ftl'>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<html>
-<head><title>List Hosts name</title>
-<body>
-<div id="header">
 
-</div>
- 
-
-  <fieldset>
-    <legend>Host Inf</legend>
+  <legend>Добавим нового пользователя</legend>
   <form action="addUser" method="POST">
   
  <table> 
@@ -44,7 +35,4 @@
   </form>
   </fieldset>
   <br/>
-  
-</div>  
-</body>
-</html>  
+<#include '/include/footer.ftl'>  

@@ -1,20 +1,18 @@
-<#import "spring.ftl" as spring />
-<#assign security=JspTaglibs["http://www.springframework.org/security/tags"] />
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<div class="container" style="width: 300px;">
-    <form action="<@spring.url '/j_spring_security_check'/>" method="post">
-        <h2>Please sign in</h2>      
-        <input type="text" class="form-control" name="j_username" placeholder="login" required autofocus >
-        <input type="password" class="form-control" name="j_password" placeholder="password" >
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-   
-    </form>
-</div>
-</body>
-</html>
+<#include '/include/header.ftl'> 
+	<div class="container-fluid">
+		<div class="col-lg-3 col-lg-offset-4">
+		    <form action="<@spring.url '/j_spring_security_check'/>" method="post">
+		        <h3>Please sign in</h3>     	        
+		        <div class="form-group">
+	   				<label for="inputLogin">Login:</label>
+	    			<input type="text" class="form-control" name="j_username" placeholder="Ener login" required autofocus>
+	  			</div>
+	  			<div class="form-group">
+	    			<label for="inputPassword">Password</label>
+	    			<input type="password" class="form-control"  name="j_password" placeholder="Password" >
+	  			</div>
+		   		<button type="submit" class="btn btn-primary">Submit</button>
+		    </form>
+		</div>    
+	</div>
+<#include '/include/footer.ftl'> 

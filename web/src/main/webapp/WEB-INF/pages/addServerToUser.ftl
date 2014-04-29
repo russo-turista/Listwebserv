@@ -1,16 +1,7 @@
-<#import "spring.ftl" as spring />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<html>
-<head><title>List Hosts name</title>
-<body>
-<div id="header">
-
-</div>
- 
-<div id="content">
+<#include '/include/header.ftl'> 
      
-  <fieldset>
-    <legend>Host Inf</legend>
+  
+  <legend>Распределение серверов по пользователям</legend>
   <form action="addServerToUser" method="POST">
   
   <table> 
@@ -25,9 +16,6 @@
    </table>
     <input type="submit" value="Send" />
   </form>
-  </fieldset>
-  <br/>
   
-</div>  
-</body>
-</html>  
+  <br/>
+<#include '/include/footer.ftl'> 

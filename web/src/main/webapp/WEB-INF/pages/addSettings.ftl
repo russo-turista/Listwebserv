@@ -1,7 +1,6 @@
 <#include '/include/header.ftl'> 
 
-  <fieldset>
-    <legend>Host Inf</legend>
+  <legend>Настройки</legend>
   <form action="" method="POST">
   
  <table> 
@@ -30,7 +29,6 @@
  </table>
     <input type="submit" value="Send" />
   </form>
-  </fieldset>
   <br/>
- 
-<#include '/include/footer.ftl'>
+  
+<#include '/include/footer.ftl'> 
