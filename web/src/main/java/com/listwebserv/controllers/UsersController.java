@@ -34,6 +34,7 @@ public class UsersController {
 		model.addAttribute("user", user);
 		
 		System.out.println("AddEUser!!!!!!!!!");
+		model.addAttribute("currentPage", "addUser");
 		return "addUser";
 	}
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
@@ -44,6 +45,7 @@ public class UsersController {
 		System.out.println("user active: " + user.getActive());
 		userService.setUser(user);
 		System.out.println("addUser POST");
+		model.addAttribute("currentPage", "addUser");
 		return "addUser";
 	}
 	
@@ -55,6 +57,7 @@ public class UsersController {
 		
 		model.addAttribute("listUsers", userService.getMapIdUsers());
 		model.addAttribute("user", user);
+		model.addAttribute("currentPage", "addServerToUser");
 		return "addServerToUser";
 	}
 	@RequestMapping(value = "/addServerToUser", method = RequestMethod.POST)
@@ -72,12 +75,14 @@ public class UsersController {
 		
 		model.addAttribute("listUsers", userService.getMapIdUsers());
 		model.addAttribute("user", user);
+		model.addAttribute("currentPage", "addServerToUser");
 		return "addServerToUser";
 	}
 	
 	@RequestMapping(value = "/listUsers")
 	public String getListUsers(ModelMap model){
 		model.addAttribute("listUsers", userService.getListUsers());
+		model.addAttribute("currentPage", "listUsers");
 		return "listUsers";
 	}
 	@RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
@@ -87,6 +92,7 @@ public class UsersController {
 		for (Server item :  seversService.getServersToUser(userId)){
 			System.out.println(item.getHostName());
 		}
+		model.addAttribute("currentPage", "user");
 		return "userpage";
 	  
 	}

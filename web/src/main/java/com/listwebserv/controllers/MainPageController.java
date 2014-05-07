@@ -21,7 +21,8 @@ public class MainPageController {
 	private  final Logger logger = Logger.getLogger(MainPageController.class);
 	
 	@RequestMapping(value = "/")
-	public String setUser(ModelMap model) {		
+	public String setUser(ModelMap model) {	
+		model.addAttribute("currentPage", "");
 		return "index";
 	}
 }

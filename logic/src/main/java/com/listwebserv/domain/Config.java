@@ -44,15 +44,15 @@ public class Config {
 	 * 
 	 * Влючен или выключен опрос серверов
 	 */
-	private boolean activeRuquest;
+	private boolean isActiveRuquest;
 	
-	public boolean getActiveRuquest() {
-		return activeRuquest;
+	public boolean getIsActiveRuquest() {
+		return isActiveRuquest;
 	}
 
 
-	public void setActiveRuquest(boolean activeRuquest) {
-		this.activeRuquest = activeRuquest;
+	public void setIsActiveRuquest(boolean isActiveRuquest) {
+		this.isActiveRuquest = isActiveRuquest;
 	}
 
 

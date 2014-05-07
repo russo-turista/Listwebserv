@@ -59,7 +59,7 @@ public class SettingsDAOImpl implements  SettingsDAO{
         	config.setTimeUpdate(rs.getInt("timeUpdate"));
         	config.setPortSMTP(rs.getInt("portSMTP"));
         	config.setAddressSMTP(rs.getString("addressSMTP"));
-        	config.setActiveRuquest(rs.getBoolean("activeRuquest"));
+        	config.setIsActiveRuquest(rs.getBoolean("activeRuquest"));
         
             return config;
         }
@@ -72,7 +72,7 @@ public class SettingsDAOImpl implements  SettingsDAO{
 		
 		Object[] parameters = {config.getTimeRequest(), config.getTimeOutWaiting(),
 				 			   config.getTimeUpdate(), config.getPortSMTP(),
-				 			   config.getAddressSMTP(), config.getActiveRuquest()};
+				 			   config.getAddressSMTP(), config.getIsActiveRuquest()};
 
 	        jdbcTemplate.update(sql, parameters);
 	}

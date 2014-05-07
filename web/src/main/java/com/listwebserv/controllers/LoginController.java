@@ -15,6 +15,7 @@ import com.listwebserv.logic.ScheduledRequestServers;
 public class LoginController {
     @RequestMapping(method = RequestMethod.GET)
     public String loginPage(Model model){
+    	model.addAttribute("currentPage", "");
     	return "login";
     }    
 }    

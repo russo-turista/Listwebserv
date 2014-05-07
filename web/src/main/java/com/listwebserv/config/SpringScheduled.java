@@ -53,7 +53,7 @@ public class SpringScheduled implements SchedulingConfigurer {
 			@Override
 			public void run() {
 				//logger.info("Ruquest servers is active:" + settingsService.getConfig().getActiveRuquest());
-				if (settingsService.getConfig().getActiveRuquest()) {
+				if (settingsService.getConfig().getIsActiveRuquest()) {
 					requestServers.startRequest();
 				}
 			}

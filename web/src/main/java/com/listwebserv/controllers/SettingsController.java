@@ -28,11 +28,13 @@ public class SettingsController {
 	public String addSettings(ModelMap model) {
 		model.addAttribute("config", settingsService.getConfig());
 		System.out.println("AddConfig!!!!!!!!!");
+		model.addAttribute("currentPage", "Settings");
 		return "addSettings";
 	}
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public String getSettings(ModelMap model, @ModelAttribute("config") Config config) {
 		settingsService.setConfig(config);
+		model.addAttribute("currentPage", "Settings");
 		return "addSettings";
 	}
 	/*@RequestMapping(value = "/")
@@ -40,4 +42,10 @@ public class SettingsController {
 		model.addAttribute("config", settingsService.getConfig());
 		return "settings";
 	}*/
+	@RequestMapping(value = "/stopPing", method = RequestMethod.POST)
+	public String getstopPing(ModelMap model, @ModelAttribute("config") Config config) {
+		settingsService.setConfig(config);
+		model.addAttribute("currentPage", "Settings");
+		return "addSettings";
+	}
 }

@@ -1,4 +1,5 @@
 <#import "/spring.ftl" as spring />
+<#import "macro.ftl" as m />
 <#import "formCheckbox.ftl" as formCheckbox />
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -29,12 +30,12 @@
 		                            </div>
 		                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		                                <ul class="nav navbar-nav">
-		                                	<li class="active"><a href="<@spring.url '/addServer' />">Добавить сервер</a></li>
-		                                    <li class=""><a href="<@spring.url '/listServers' />">Список серверов</a></li>
-		                                    <li class=""><a href="<@spring.url '/addUser' />">Добавить пользователя</a></li>
-		                                    <li><a href="<@spring.url '/listUsers'/>">Все пользователи</a></li>
-		                                    <li><a href="<@spring.url '/addServerToUser'/>">SerToUser</a></li>
-		                                    <li><a href="<@spring.url '/Settings'/>">Настройки</a></li>
+		                                	<li <@m.isActive 'addServer'/>><a href="<@spring.url '/addServer' />">Добавить сервер</a></li>
+		                                    <li <@m.isActive 'listServers'/>><a href="<@spring.url '/listServers' />">Список серверов</a></li>
+		                                    <li <@m.isActive 'addUser'/>><a href="<@spring.url '/addUser' />">Добавить пользователя</a></li>
+		                                    <li <@m.isActive 'listUsers'/>><a href="<@spring.url '/listUsers'/>">Все пользователи</a></li>
+		                                    <li <@m.isActive 'addServerToUser'/>><a href="<@spring.url '/addServerToUser'/>">SerToUser</a></li>
+		                                    <li <@m.isActive 'Settings'/>><a href="<@spring.url '/Settings'/>">Настройки</a></li>
 		                                </ul>
 		                            </div>
 		  						</div>

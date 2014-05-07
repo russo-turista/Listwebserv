@@ -50,7 +50,7 @@ public class ServersController {
 	@RequestMapping(value = "/addServer")
 	public String addServer(ModelMap model) {
 		model.addAttribute("server", server);
-
+		model.addAttribute("currentPage", "addServer");
 		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
 		return "addServer";
 	}	
@@ -65,6 +65,7 @@ public class ServersController {
 				seversService.setServers(server);
 			}
 		}
+		model.addAttribute("currentPage", "addServer");
 		return "addServer";
 	}	
 	@RequestMapping(value = "/listServers" /*, method = RequestMethod.POST*/)
@@ -76,10 +77,10 @@ public class ServersController {
 		int second = calendar.get(Calendar.SECOND);
 
 		model.addAttribute("currentDate",hour + ":" + minute + ":" + second);
-
+		
 		response.setHeader("Refresh", String.valueOf(settingsService.getConfig().getTimeUpdate()));
 		model.addAttribute("hostNameList", seversService.getListServ());
-
+		model.addAttribute("currentPage", "listServers");
 		return "listServers";
 	}
 
