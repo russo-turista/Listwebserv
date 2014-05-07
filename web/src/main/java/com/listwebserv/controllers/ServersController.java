@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 
@@ -51,6 +53,7 @@ public class ServersController {
 	public String addServer(ModelMap model) {
 		model.addAttribute("server", server);
 		model.addAttribute("currentPage", "addServer");
+		model.addAttribute("isCreate", "true");
 		System.out.println("hostNameSET!!!!!!!!!!!!!!!!!!!!!");
 		return "addServer";
 	}	
@@ -83,7 +86,18 @@ public class ServersController {
 		model.addAttribute("currentPage", "listServers");
 		return "listServers";
 	}
-
+	@RequestMapping(value = "/editServer/{idServer}")
+	public String setEditServer (@PathVariable Long idServer, ModelMap model) throws Exception {
+		model.addAttribute("server", seversService.getIdServers(idServer));
+		model.addAttribute("currentPage", "listServers");
+		model.addAttribute("isCreate", "false");
+		return "addServer";
+	}
+	@RequestMapping(value = "/editServer",method = RequestMethod.POST)
+	public String getEditServer (ModelMap model, @ModelAttribute("server") Server server) throws Exception {
+		//seversService
+		return "listServers";
+	}
 
 
 

@@ -4,3 +4,11 @@
     	 class="active"
     </#if>
 </#macro>
+ 
+ <#macro isCreate >
+ 	<#if '${isCraete}' == true>
+    	Добавить
+    <#else>
+    	Изменить
+    </#if>	
+</#macro>

@@ -10,6 +10,7 @@ import com.listwebserv.domain.User;
 public interface ServersService {
 	public Server getServers(String hostName);
 	public void setServers(Server server);
+	public Server getIdServers(Long idServer);
 	public List<Server> getListServ();
 	public Map<String, String> getMapIdServers();
 	public void setMapIdServers(Map<String, String> mapServers);

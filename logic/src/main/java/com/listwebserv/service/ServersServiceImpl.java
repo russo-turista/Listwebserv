@@ -81,4 +81,9 @@ public class ServersServiceImpl implements ServersService {
 	public List<Server> getServersToUser(Long idUser){ 
 		return listServDAO.getServersToUserDB(idUser);
 	}
+	@Override
+	public Server getIdServers(Long idServer) {
+		// TODO Auto-generated method stub
+		return listServDAO.getIdServerDB(idServer);
+	}
 }

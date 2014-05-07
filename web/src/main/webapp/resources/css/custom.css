@@ -5,3 +5,11 @@
 	margin-bottom: 5%;
 	padding-left: 3%;
 }
+.checkbox label{
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.control-label{
+	padding-top: 0px !important;	
+}

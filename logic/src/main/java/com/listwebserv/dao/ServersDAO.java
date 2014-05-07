@@ -14,6 +14,8 @@ public interface ServersDAO {
 
 	
 	public void setServerDB(Server server); 
+	public void setEditServerDB(Server server);
+	public Server getIdServerDB(Long idServer);
 	public List<Server> getListServDB(); 
 	public void updateSeverDB(Server server);
 	public Map<String, Object> getmapIdServersDB();

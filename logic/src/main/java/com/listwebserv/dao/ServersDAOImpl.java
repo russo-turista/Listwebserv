@@ -132,7 +132,28 @@ public class ServersDAOImpl implements ServersDAO {
 		return jdbcTemplate.query(sql, rowMapperServ, idUser);
 	}
 
+	@Override
+	public Server getIdServerDB(Long idServer) {
+		sql = "SELECT * FROM server WHERE idServer = ?";
+		return jdbcTemplate.queryForObject(sql, rowMapperServ, idServer);
+	}
 
+
+	@Override
+	public void setEditServerDB(Server server) {
+		sql = "UPDATE  server SET hostName = ?, hostPort = ?, lastCheck = ?, "
+				+ "ACTIVE = ?, STATE = ?::state_type, RESPONSE = ?, "
+				+ "IPADDRESS = ? WHERE idServer = ?";
+		
+		Object[] parameters = {
+				server.getHostName(), server.getHostPort(), 
+				new Timestamp(System.currentTimeMillis()), 
+				server.getActive(), server.getState().name(), 
+				server.getResponse(), server.getIpAddress(), server.getIdServer()};
+
+	   jdbcTemplate.update(sql, parameters);
+		
+	}
 
 	
 }
